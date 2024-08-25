@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=ru.ivars.rozhleys.notes
+Exec=/usr/bin/ru.ivars.rozhleys.notes
+Name=Notes
+Name[ru]=Заметки
+
+[X-Application]
+Permissions=SecureStorage;Audio;Camera;Documents;Location;MediaIndexing;Microphone
+OrganizationName=ru.ivars.rozhleys
+ApplicationName=notes
+ExecDBus=/usr/bin/ru.ivars.rozhleys.notes
