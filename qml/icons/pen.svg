@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg1890"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="pen.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1892"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="5.8012346"
+     inkscape:cx="8.7050436"
+     inkscape:cy="37.664396"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1887" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       d="m 10.405004,3.5280866 c 0,0.3352271 -0.130704,0.6506104 -0.367771,0.8879417 L 5.0646541,9.3888715 2.5656646,9.6661555 2.8432125,7.1674303 7.8160562,2.1948512 C 8.0531228,1.95752 8.3687708,1.8270804 8.7039978,1.8270804 c 0.3354921,0 0.6511401,0.1307042 0.8882061,0.3677708 L 10.037233,2.640145 c 0.237332,0.2368021 0.367771,0.55245 0.367771,0.8879416 z M 9.1508789,2.6361762 c -0.238654,-0.2389187 -0.6548436,-0.2389187 -0.8934977,0 L 7.5382437,3.3550491 8.8770353,4.6938408 9.5961729,3.9749679 c 0.119327,-0.1195917 0.185208,-0.2783417 0.185208,-0.4468813 0,-0.1688041 -0.06588,-0.3275541 -0.185208,-0.4468812 z M 3.4390542,7.4539741 3.2718375,8.9602465 4.7781104,8.7930305 8.4359749,5.1349012 7.0971833,3.7961095 Z M 1.9830521,10.249033 H 10.716948 V 10.87292 H 1.9830521 Z"
+       fill="#000000"
+       id="path316"
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583" />
+  </g>
+</svg>
