@@ -16,6 +16,8 @@ file(GLOB TsFiles "translations/*.ts")
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(SOURCES
+    src/listviewmodel.cpp
+    src/listviewmodel.h
     src/main.cpp
 )
 

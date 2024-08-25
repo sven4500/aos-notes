@@ -27,6 +27,7 @@ Page {
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
         color: "gray"
+        visible: _listViewModel.length === 0
     }
 
     Footer {
