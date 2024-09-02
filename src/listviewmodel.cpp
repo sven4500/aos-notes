@@ -27,6 +27,10 @@ QVariant ListViewModel::data(const QModelIndex &index, int role) const
     // NOTE: remove HeightRole later
     case HeightRole:
         return 150 + rand() % 350;
+
+    case NoteType:
+        return TextNote;
+
     default:
         qDebug() << "no such role exist" << role;
         return {};
@@ -38,6 +42,7 @@ QHash<int, QByteArray> ListViewModel::roleNames() const
     return {
         {DateTimeRole, "dateTime"},
         // NOTE: remove HeightRole later
-        {HeightRole, "height"}
+        {HeightRole, "height"},
+        {NoteType, "type"}
     };
 }

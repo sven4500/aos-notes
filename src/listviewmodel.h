@@ -12,10 +12,18 @@ signals:
     void rowCountChanged();
 
 public:
+    enum NoteType {
+        TextNote,
+        SketchNote,
+        AudioNote
+    };
+    Q_ENUM(NoteType)
+
     enum RoleNames {
         DateTimeRole = Qt::UserRole + 0,
         // NOTE: remove HeightRole later
-        HeightRole = Qt::UserRole + 1
+        HeightRole = Qt::UserRole + 1,
+        NoteType = Qt::UserRole + 2
     };
 
     // INFO: https://stackoverflow.com/questions/51728264/model-rowcount-wont-bind-to-items-property

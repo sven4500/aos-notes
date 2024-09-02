@@ -9,20 +9,21 @@ Rectangle {
     height: Theme.itemSizeMedium
     anchors.bottom: parent.bottom
     color: "white"
-    //border { width: 1; color: "red" }
+    border { width: 1; color: "red" }
 
     ImageButton {
         id: writeButton
         anchors.left: parent.left
-        anchors.leftMargin: Theme.paddingLarge
+        anchors.leftMargin: Theme.paddingMedium
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/pen.svg")
+        onClicked: pageStack.push(Qt.resolvedUrl("../pages/TextNotePage.qml"))
     }
 
     ImageButton {
         id: sketchButton
         anchors.left: writeButton.right
-        anchors.leftMargin: Theme.paddingLarge
+        anchors.leftMargin: Theme.paddingMedium
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/marker.svg")
     }
@@ -30,7 +31,7 @@ Rectangle {
     ImageButton {
         id: recordButton
         anchors.left: sketchButton.right
-        anchors.leftMargin: Theme.paddingLarge
+        anchors.leftMargin: Theme.paddingMedium
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/tape.svg")
     }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import ViewModels 1.0
 import "../elements"
 
 Page {
@@ -14,6 +15,7 @@ Page {
 
     Header {
         id: header
+        headerType: HeaderViewModel.MainHeader
     }
 
     Text {
@@ -21,7 +23,7 @@ Page {
         anchors.bottom: footer.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: Theme.paddingLarge
+        anchors.margins: Theme.paddingMedium
         text: qsTr("No notes have been made at this time. Click any button below to create a note.")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -34,9 +36,9 @@ Page {
         anchors.top: header.bottom
         anchors.bottom: footer.top
         anchors.left: parent.left
-        anchors.leftMargin: Theme.paddingLarge
+        anchors.leftMargin: Theme.paddingMedium
         anchors.right: parent.right
-        anchors.rightMargin: Theme.paddingLarge
+        anchors.rightMargin: Theme.paddingMedium
         //contentWidth: flow.childrenRect.width
         contentHeight: flow.childrenRect.height
         clip: true
