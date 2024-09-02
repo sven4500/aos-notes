@@ -1,19 +1,21 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Item {
+Rectangle {
     id: root
     width: Theme.iconSizeMedium
     height: Theme.iconSizeMedium
+    color: "transparent"
+    border { color: "#ff0000" }
 
     property alias image: image.source
     signal clicked()
 
     Image {
         id: image
-        anchors.fill: parent
-        sourceSize.width: width
-        sourceSize.height: height
+        anchors.centerIn: parent
+        sourceSize.width: root.width * 0.8
+        sourceSize.height: root.height * 0.8
     }
 
     MouseArea {

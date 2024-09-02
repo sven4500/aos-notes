@@ -25,6 +25,7 @@ Rectangle {
     ]
 
     property int headerType: HeaderViewModel.MainHeader
+    readonly property string defaultTile: qsTr("New note") + " " + Qt.formatDateTime(new Date(), "yyyy/MM/dd hh:mm")
 
     ImageButton {
         id: backButton
@@ -51,9 +52,11 @@ Rectangle {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
-        text: _headerViewModel.noteTitle.length !== 0 ? _headerViewModel.noteTitle : qsTr("New note")
-        labelVisible: false
+        text: _headerViewModel.noteTitle
+        placeholderText: defaultTile
         color: "black"
+        placeholderColor: "gray"
+        labelVisible: false
         backgroundStyle: TextEditor.UnderlineBackground
         visible: false
     }
