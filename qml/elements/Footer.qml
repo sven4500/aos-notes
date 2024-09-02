@@ -14,7 +14,7 @@ Rectangle {
     ImageButton {
         id: writeButton
         anchors.left: parent.left
-        anchors.leftMargin: Theme.paddingMedium
+        anchors.leftMargin: Theme.paddingLarge
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/pen.svg")
     }
@@ -22,7 +22,7 @@ Rectangle {
     ImageButton {
         id: sketchButton
         anchors.left: writeButton.right
-        anchors.leftMargin: Theme.paddingMedium
+        anchors.leftMargin: Theme.paddingLarge
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/marker.svg")
     }
@@ -30,7 +30,7 @@ Rectangle {
     ImageButton {
         id: recordButton
         anchors.left: sketchButton.right
-        anchors.leftMargin: Theme.paddingMedium
+        anchors.leftMargin: Theme.paddingLarge
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/tape.svg")
     }
