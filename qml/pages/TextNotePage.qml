@@ -9,6 +9,26 @@ Page {
     allowedOrientations: Orientation.All
     showNavigationIndicator: false
 
+    property int id: 0
+
+    Binding {
+        target: _textNoteViewModel
+        property: "id"
+        value: id
+    }
+
+    Binding {
+        target: _textNoteViewModel
+        property: "title"
+        value: header.noteTitle
+    }
+
+    Binding {
+        target: _textNoteViewModel
+        property: "body"
+        value: textArea.text
+    }
+
     Rectangle {
         anchors.fill: parent
         color: "white"
@@ -17,6 +37,7 @@ Page {
     Header {
         id: header
         headerType: HeaderViewModel.NoteHeader
+        onBackClicked: _textNoteViewModel.saveNote()
     }
 
     TextArea {

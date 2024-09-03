@@ -25,7 +25,10 @@ Rectangle {
     ]
 
     property int headerType: HeaderViewModel.MainHeader
-    readonly property string defaultTile: qsTr("New note") + " " + Qt.formatDateTime(new Date(), "yyyy/MM/dd hh:mm")
+    property string noteTitle: noteTitle.text.length !== 0 ? noteTitle.text : defaultNoteTitle
+    readonly property string defaultNoteTitle: qsTr("New note") + " " + Qt.formatDateTime(new Date(), "yyyy.MM.dd hh:mm")
+
+    signal backClicked()
 
     ImageButton {
         id: backButton
@@ -34,7 +37,10 @@ Rectangle {
         anchors.margins: Theme.paddingMedium
         image: Qt.resolvedUrl("../icons/back.svg")
         visible: false
-        onClicked: pageStack.pop()
+        onClicked: {
+            backClicked()
+            pageStack.pop()
+        }
     }
 
     Text {
@@ -53,7 +59,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
         text: _headerViewModel.noteTitle
-        placeholderText: defaultTile
+        placeholderText: defaultNoteTitle
         color: "black"
         placeholderColor: "gray"
         labelVisible: false

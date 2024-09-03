@@ -21,6 +21,8 @@ set(SOURCES
     src/listviewmodel.cpp
     src/listviewmodel.h
     src/main.cpp
+    src/textnoteviewmodel.cpp
+    src/textnoteviewmodel.h
 )
 
 set(CMAKE_SKIP_RPATH FALSE)
