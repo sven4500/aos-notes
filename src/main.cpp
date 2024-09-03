@@ -3,9 +3,9 @@
 
 #include <auroraapp.h>
 
-#include "abstractnoteviewmodel.h"
-#include "listviewmodel.h"
-#include "textnoteviewmodel.h"
+#include "viewmodels/abstractnoteviewmodel.h"
+#include "viewmodels/listviewmodel.h"
+#include "viewmodels/textnoteviewmodel.h"
 
 int main(int argc, char *argv[])
 {

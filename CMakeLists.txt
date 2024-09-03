@@ -16,13 +16,13 @@ file(GLOB TsFiles "translations/*.ts")
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(SOURCES
-    src/abstractnoteviewmodel.cpp
-    src/abstractnoteviewmodel.h
-    src/listviewmodel.cpp
-    src/listviewmodel.h
     src/main.cpp
-    src/textnoteviewmodel.cpp
-    src/textnoteviewmodel.h
+    src/viewmodels/abstractnoteviewmodel.cpp
+    src/viewmodels/abstractnoteviewmodel.h
+    src/viewmodels/listviewmodel.cpp
+    src/viewmodels/listviewmodel.h
+    src/viewmodels/textnoteviewmodel.cpp
+    src/viewmodels/textnoteviewmodel.h
 )
 
 set(CMAKE_SKIP_RPATH FALSE)
