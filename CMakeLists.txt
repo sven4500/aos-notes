@@ -18,8 +18,6 @@ qt5_add_translation(QmFiles ${TsFiles})
 set(SOURCES
     src/abstractnoteviewmodel.cpp
     src/abstractnoteviewmodel.h
-    src/headerviewmodel.cpp
-    src/headerviewmodel.h
     src/listviewmodel.cpp
     src/listviewmodel.h
     src/main.cpp

@@ -15,7 +15,7 @@ Page {
 
     Header {
         id: header
-        headerType: HeaderViewModel.MainHeader
+        headerType: AbstractNoteViewModel.MainHeader
     }
 
     Text {

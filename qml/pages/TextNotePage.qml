@@ -36,7 +36,7 @@ Page {
 
     Header {
         id: header
-        headerType: HeaderViewModel.NoteHeader
+        headerType: AbstractNoteViewModel.NoteHeader
         onBackClicked: _textNoteViewModel.saveNote()
     }
 

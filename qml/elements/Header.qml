@@ -14,17 +14,17 @@ Rectangle {
 
     states: [
         State {
-            name: "MainHeaderState"; when: headerType === HeaderViewModel.MainHeader
+            name: "MainHeaderState"; when: headerType === AbstractNoteViewModel.MainHeader
         },
         State {
-            name: "NoteHeaderState"; when: headerType === HeaderViewModel.NoteHeader
+            name: "NoteHeaderState"; when: headerType === AbstractNoteViewModel.NoteHeader
             PropertyChanges { target: applicationName; visible: false }
             PropertyChanges { target: backButton; visible: true }
             PropertyChanges { target: noteTitle; visible: true }
         }
     ]
 
-    property int headerType: HeaderViewModel.MainHeader
+    property int headerType: AbstractNoteViewModel.MainHeader
     property string noteTitle: noteTitle.text.length !== 0 ? noteTitle.text : defaultNoteTitle
     readonly property string defaultNoteTitle: qsTr("New note") + " " + Qt.formatDateTime(new Date(), "yyyy.MM.dd hh:mm")
 
@@ -58,7 +58,6 @@ Rectangle {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
-        text: _headerViewModel.noteTitle
         placeholderText: defaultNoteTitle
         color: "black"
         placeholderColor: "gray"

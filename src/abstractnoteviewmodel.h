@@ -14,6 +14,12 @@ signals:
     void titleChanged();
 
 public:
+    enum HeaderType {
+        MainHeader,
+        NoteHeader
+    };
+    Q_ENUM(HeaderType)
+
     Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
 
