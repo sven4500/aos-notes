@@ -14,14 +14,9 @@ signals:
     void titleChanged();
 
 public:
-    enum HeaderType {
-        MainHeader,
-        NoteHeader
-    };
-    Q_ENUM(HeaderType)
-
     Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
+    Q_PROPERTY(int defaultId READ defaultId CONSTANT)
 
     explicit AbstractNoteViewModel(QObject *parent = nullptr);
 
@@ -33,9 +28,12 @@ public:
     const QString &title() const;
     void setTitle(const QString &newTitle);
 
+    int defaultId() const;
+
 protected:
     QString m_title;
-    int m_id = 0;
+    int const m_defaultId = 0;
+    int m_id = m_defaultId;
 
 };
 

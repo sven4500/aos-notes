@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import ViewModels 1.0
 import "../elements"
 
 Page {
@@ -9,7 +8,7 @@ Page {
     allowedOrientations: Orientation.All
     showNavigationIndicator: false
 
-    property int id: 0
+    property int id: _textNoteViewModel.defaultId
 
     Binding {
         target: _textNoteViewModel
@@ -34,9 +33,8 @@ Page {
         color: "white"
     }
 
-    Header {
+    NoteHeader {
         id: header
-        headerType: AbstractNoteViewModel.NoteHeader
         onBackClicked: _textNoteViewModel.saveNote()
     }
 

@@ -12,7 +12,7 @@ TextNoteViewModel::TextNoteViewModel(QObject *parent)
 
 void TextNoteViewModel::saveNote()
 {
-    qDebug() << "save abstract note clicked" << m_id << m_title << m_body;
+    qDebug() << "save text note clicked" << m_id << m_title << m_body;
 }
 
 const QString &TextNoteViewModel::body() const

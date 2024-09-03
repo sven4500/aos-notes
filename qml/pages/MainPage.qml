@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import ViewModels 1.0
 import "../elements"
 
 Page {
@@ -13,9 +12,8 @@ Page {
         color: "white"
     }
 
-    Header {
+    ApplicationHeader {
         id: header
-        headerType: AbstractNoteViewModel.MainHeader
     }
 
     Text {

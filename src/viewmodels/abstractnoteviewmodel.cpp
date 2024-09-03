@@ -35,4 +35,9 @@ void AbstractNoteViewModel::setTitle(const QString &newTitle)
     emit titleChanged();
 }
 
+int AbstractNoteViewModel::defaultId() const
+{
+    return m_defaultId;
+}
+
 }
