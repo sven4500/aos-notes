@@ -19,6 +19,8 @@ set(SOURCES
     src/dto/databaseentry.h
     src/dto/textnote.h
     src/main.cpp
+    src/models/databasemodel.cpp
+    src/models/databasemodel.h
     src/viewmodels/abstractnoteviewmodel.cpp
     src/viewmodels/abstractnoteviewmodel.h
     src/viewmodels/listviewmodel.cpp
