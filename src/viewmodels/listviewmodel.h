@@ -12,13 +12,6 @@ signals:
     void rowCountChanged();
 
 public:
-    enum NoteType {
-        TextNote,
-        SketchNote,
-        AudioNote
-    };
-    Q_ENUM(NoteType)
-
     enum RoleNames {
         DateTimeRole = Qt::UserRole + 0,
         // NOTE: remove HeightRole later

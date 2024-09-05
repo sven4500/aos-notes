@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(ru.ivars.rozhleys.notes CXX)
 
-find_package (Qt5 COMPONENTS Core Network Qml Gui Quick LinguistTools REQUIRED)
+find_package (Qt5 COMPONENTS Core Network Qml Gui Quick LinguistTools Sql REQUIRED)
 
 include(FindPkgConfig)
 pkg_search_module(AURORA auroraapp REQUIRED)
@@ -16,7 +16,7 @@ file(GLOB TsFiles "translations/*.ts")
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(SOURCES
-    src/dto/abstractnote.h
+    src/dto/databaseentry.h
     src/dto/textnote.h
     src/main.cpp
     src/viewmodels/abstractnoteviewmodel.cpp
@@ -38,9 +38,11 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 target_include_directories(${PROJECT_NAME} PRIVATE
     $<BUILD_INTERFACE:
     ${AURORA_INCLUDE_DIRS}
+    ${CMAKE_SOURCE_DIR}/src
 >)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt5::Quick
+    Qt5::Sql
     ${AURORA_LDFLAGS}
 )
 
