@@ -16,6 +16,8 @@ file(GLOB TsFiles "translations/*.ts")
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(SOURCES
+    src/dto/abstractnote.h
+    src/dto/textnote.h
     src/main.cpp
     src/viewmodels/abstractnoteviewmodel.cpp
     src/viewmodels/abstractnoteviewmodel.h
