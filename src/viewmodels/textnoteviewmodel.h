@@ -3,29 +3,45 @@
 
 #include <QObject>
 
-#include "abstractnoteviewmodel.h"
+namespace Models {
+class TextNoteModel;
+}
 
 namespace ViewModels {
 
-class TextNoteViewModel : public AbstractNoteViewModel
+class TextNoteViewModel: public QObject
 {
     Q_OBJECT
 
 signals:
+    void idChanged();
+    void titleChanged();
     void bodyChanged();
 
 public:
+    Q_PROPERTY(qint64 id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString body READ body WRITE setBody NOTIFY bodyChanged)
 
-    explicit TextNoteViewModel(QObject *parent = nullptr);
+    explicit TextNoteViewModel(Models::TextNoteModel* model = nullptr, QObject *parent = nullptr);
 
     Q_INVOKABLE virtual void saveNote();
+
+    qint64 id() const;
+    void setId(qint64 newId);
+
+    const QString &title() const;
+    void setTitle(const QString &newTitle);
 
     const QString &body() const;
     void setBody(const QString &newBody);
 
 private:
+    qint64 m_id = 0;
+    QString m_title;
     QString m_body;
+
+    Models::TextNoteModel* m_model = nullptr;
 
 };
 

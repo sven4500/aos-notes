@@ -3,11 +3,15 @@
 
 #include <QString>
 
-#include "abstractnote.h"
+namespace DTO {
 
-struct TextNote: public AbstractNote
+struct TextNote
 {
+    qint64 id;
+    QString title;
     QString body;
 };
+
+}
 
 #endif // TEXTNOTE_H

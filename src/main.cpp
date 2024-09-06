@@ -3,6 +3,7 @@
 
 #include <auroraapp.h>
 
+#include "models/textnotemodel.h"
 #include "viewmodels/listviewmodel.h"
 #include "viewmodels/textnoteviewmodel.h"
 
@@ -12,8 +13,14 @@ int main(int argc, char *argv[])
     application->setOrganizationName(QStringLiteral("ru.ivars.rozhleys"));
     application->setApplicationName(QStringLiteral("notes"));
 
-    auto const listViewModel = new ListViewModel(/*&*application*/);
-    auto const textNoteViewModel = new ViewModels::TextNoteViewModel();
+    auto const textNoteModel = new Models::TextNoteModel(&*application);
+    // TODO: sketchNoteModel
+    // TODO: audioNoteModel
+
+    auto const listViewModel = new ListViewModel(&*application);
+    auto const textNoteViewModel = new ViewModels::TextNoteViewModel(textNoteModel, &*application);
+    // TODO: sketchNoteViewModel
+    // TODO: audioNoteViewModel
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
     view->rootContext()->setContextProperty("_listViewModel", listViewModel);

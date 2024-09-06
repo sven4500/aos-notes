@@ -21,8 +21,8 @@ set(SOURCES
     src/main.cpp
     src/models/databasemodel.cpp
     src/models/databasemodel.h
-    src/viewmodels/abstractnoteviewmodel.cpp
-    src/viewmodels/abstractnoteviewmodel.h
+    src/models/textnotemodel.cpp
+    src/models/textnotemodel.h
     src/viewmodels/listviewmodel.cpp
     src/viewmodels/listviewmodel.h
     src/viewmodels/textnoteviewmodel.cpp

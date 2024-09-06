@@ -1,6 +1,7 @@
 #include <QDebug>
 
 #include "listviewmodel.h"
+#include "../models/databasemodel.h"
 
 ListViewModel::ListViewModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -29,7 +30,7 @@ QVariant ListViewModel::data(const QModelIndex &index, int role) const
         return 150 + rand() % 350;
 
     case NoteType:
-        return TextNote;
+        return Models::DatabaseModel::TextNote;
 
     default:
         qDebug() << "no such role exist" << role;

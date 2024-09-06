@@ -8,7 +8,7 @@ Page {
     allowedOrientations: Orientation.All
     showNavigationIndicator: false
 
-    property int id: _textNoteViewModel.defaultId
+    property int id: 0
 
     Binding {
         target: _textNoteViewModel
