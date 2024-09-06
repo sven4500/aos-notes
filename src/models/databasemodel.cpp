@@ -19,7 +19,7 @@ DatabaseModel::DatabaseModel(QObject *parent)
 
     // INFO: https://stackoverflow.com/questions/2241808/checking-if-a-folder-exists-and-creating-folders-in-qt-c
     QDir const workingDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) +
-            QDir::separator() + "Notes";
+            QDir::separator() + "notes";
     QDir().mkdir(workingDir.path());
 
     m_database = QSqlDatabase::addDatabase(DriverName);

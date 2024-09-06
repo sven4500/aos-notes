@@ -1,6 +1,7 @@
 #ifndef TEXTNOTEMODEL_H
 #define TEXTNOTEMODEL_H
 
+#include <QDir>
 #include <QObject>
 
 #include "dto/textnote.h"
@@ -25,6 +26,8 @@ public:
     void erase(qint64 id);
 
 private:
+    static QDir const WorkingDir;
+
     DatabaseModel* m_databaseModel = nullptr;
 
 };
