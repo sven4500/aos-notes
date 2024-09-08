@@ -9,7 +9,7 @@ Rectangle {
     height: Theme.itemSizeMedium
     anchors.bottom: parent.bottom
     color: "white"
-    border { width: 1; color: "red" }
+    //border { width: 1; color: "red" }
 
     ImageButton {
         id: writeButton

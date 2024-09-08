@@ -6,7 +6,7 @@ Rectangle {
     width: Theme.iconSizeMedium
     height: Theme.iconSizeMedium
     color: "transparent"
-    border { color: "#ff0000" }
+    //border { color: "#ff0000" }
 
     property alias image: image.source
     signal clicked()

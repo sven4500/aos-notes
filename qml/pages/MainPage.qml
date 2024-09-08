@@ -56,8 +56,6 @@ Page {
                 delegate: Note {
                     id: note
                     width: flow.width * 0.5 - flow.spacing * (flow.columnCount - 1)
-                    // NOTE: remove height later
-                    height: model.height
                 }
             }
         }

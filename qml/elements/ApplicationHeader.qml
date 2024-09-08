@@ -7,7 +7,7 @@ Rectangle {
     height: Theme.itemSizeMedium
     anchors.top: parent.top
     color: "white"
-    border { width: 1; color: "red" }
+    //border { width: 1; color: "red" }
 
     Text {
         id: applicationName
