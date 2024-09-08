@@ -2,7 +2,10 @@
 #define LIST_VIEW_MODEL_H_
 
 #include <QAbstractListModel>
+#include <QList>
 #include <QObject>
+
+#include <dto/databaseentry.h>
 
 class ListViewModel: public QAbstractListModel
 {
@@ -14,9 +17,7 @@ signals:
 public:
     enum RoleNames {
         DateTimeRole = Qt::UserRole + 0,
-        // NOTE: remove HeightRole later
-        HeightRole = Qt::UserRole + 1,
-        NoteType = Qt::UserRole + 2
+        NoteType = Qt::UserRole + 1
     };
 
     // INFO: https://stackoverflow.com/questions/51728264/model-rowcount-wont-bind-to-items-property
@@ -27,6 +28,9 @@ public:
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual QHash<int, QByteArray> roleNames() const;
+
+private:
+    QList<DTO::DatabaseEntry> m_notes;
 
 };
 

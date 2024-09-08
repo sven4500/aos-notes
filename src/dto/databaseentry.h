@@ -4,6 +4,8 @@
 #include <QDateTime>
 #include <QString>
 
+namespace DTO {
+
 struct DatabaseEntry
 {
     qint64 id;
@@ -12,5 +14,7 @@ struct DatabaseEntry
     QDateTime createdAt;
     QDateTime modifiedAt;
 };
+
+}
 
 #endif // DATABASEENTRY_H

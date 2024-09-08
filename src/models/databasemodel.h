@@ -1,11 +1,11 @@
 #ifndef DATABASEMODEL_H
 #define DATABASEMODEL_H
 
+#include <optional>
+
 #include <QDir>
 #include <QObject>
 #include <QSqlDatabase>
-
-#include <optional>
 
 #include "dto/databaseentry.h"
 
@@ -26,7 +26,7 @@ public:
     explicit DatabaseModel(QObject *parent = nullptr);
 
     void create(NoteType noteType, QString title, QString media);
-    std::optional<DatabaseEntry> find(qint64 id);
+    std::optional<DTO::DatabaseEntry> find(qint64 id);
     void update(qint64 id);
     void erase(qint64 id);
 
