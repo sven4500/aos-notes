@@ -7,6 +7,10 @@
 
 #include <dto/databaseentry.h>
 
+namespace DAO {
+class DatabaseDAO;
+}
+
 class ListViewModel: public QAbstractListModel
 {
     Q_OBJECT
@@ -16,8 +20,12 @@ signals:
 
 public:
     enum RoleNames {
-        DateTimeRole = Qt::UserRole + 0,
-        NoteType = Qt::UserRole + 1
+        IdRole = Qt::UserRole + 0,
+        NoteTypeRole  = Qt::UserRole + 1,
+        TitleRole = Qt::UserRole + 2,
+        MediaRole = Qt::UserRole + 3,
+        CreatedAtRole = Qt::UserRole + 4,
+        ModifiedAtRole = Qt::UserRole + 5
     };
 
     // INFO: https://stackoverflow.com/questions/51728264/model-rowcount-wont-bind-to-items-property
@@ -31,6 +39,7 @@ public:
 
 private:
     QList<DTO::DatabaseEntry> m_notes;
+    DAO::DatabaseDAO* m_databaseDAO = nullptr;
 
 };
 

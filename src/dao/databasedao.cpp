@@ -55,15 +55,22 @@ QList<DTO::DatabaseEntry> DatabaseDAO::list() const
     qDebug() << "list database";
 
     QSqlQuery query(m_database);
-    query.prepare("SELECT * FROM media");
+    query.prepare("SELECT * FROM media ORDER BY modified DESC");
     query.exec();
 
     QList<DTO::DatabaseEntry> list;
     while(query.next()) {
-        //list.append({});
+        DTO::DatabaseEntry const entry (
+                    query.value(0).toInt(),
+                    static_cast<DTO::DatabaseEntry::NoteType>(query.value(1).toInt()),
+                    query.value(2).toString(),
+                    query.value(3).toString(),
+                    query.value(4).toDateTime(),
+                    query.value(5).toDateTime());
+        list.append(entry);
     }
 
-    return {};
+    return list;
 }
 
 }

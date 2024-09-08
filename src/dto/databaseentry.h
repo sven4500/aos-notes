@@ -19,11 +19,24 @@ public:
     };
     Q_ENUM(NoteType)
 
+    explicit DatabaseEntry(qint64 id, NoteType type, QString title, QString media, QDateTime createdAt, QDateTime modifiedAt)
+        : id(id)
+        , type(type)
+        , title(title)
+        , media(media)
+        , createdAt(createdAt)
+        , modifiedAt(modifiedAt)
+    {
+
+    }
+
     qint64 id;
+    NoteType type;
     QString title;
     QString media;
     QDateTime createdAt;
     QDateTime modifiedAt;
+
 };
 
 }

@@ -1,12 +1,16 @@
 #include <QDebug>
 
-#include "listviewmodel.h"
 #include "dao/databasedao.h"
+#include "listviewmodel.h"
 
 ListViewModel::ListViewModel(QObject *parent)
     : QAbstractListModel(parent)
+    , m_databaseDAO(new DAO::DatabaseDAO(this))
 {
     srand(time(nullptr));
+
+    m_notes = m_databaseDAO->list();
+    qDebug() << "notes loaded" << m_notes.size();
 
     // INFO: https://stackoverflow.com/questions/51728264/model-rowcount-wont-bind-to-items-property
     connect(this, &QAbstractListModel::rowsInserted,
@@ -17,16 +21,37 @@ ListViewModel::ListViewModel(QObject *parent)
 
 int ListViewModel::rowCount(const QModelIndex &parent) const
 {
-    return 0;
+    return m_notes.count();
 }
 
 QVariant ListViewModel::data(const QModelIndex &index, int role) const
 {
-    //auto const i = index.row();
+    auto const i = index.row();
+    if (i < 0 || i >= m_notes.count()) {
+        qDebug() << "note index out of bounds";
+        return {};
+    }
+
+    auto const& note = m_notes.at(i);
 
     switch(role) {
-    case NoteType:
-        return DTO::DatabaseEntry::TextNote;
+    case IdRole:
+        return note.id;
+
+    case NoteTypeRole:
+        return note.type;
+
+    case TitleRole:
+        return note.title;
+
+    case MediaRole:
+        return note.media;
+
+    case CreatedAtRole:
+        return note.createdAt;
+
+    case ModifiedAtRole:
+        return note.modifiedAt;
 
     default:
         qDebug() << "no such role exist" << role;
@@ -37,7 +62,11 @@ QVariant ListViewModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> ListViewModel::roleNames() const
 {
     return {
-        {DateTimeRole, "dateTime"},
-        {NoteType, "type"}
+        {IdRole, "id"},
+        {NoteTypeRole, "type"},
+        {TitleRole, "title"},
+        {MediaRole, "media"},
+        {CreatedAtRole, "createdAt"},
+        {ModifiedAtRole, "modifiedAt"}
     };
 }
