@@ -16,18 +16,16 @@ class DatabaseDAO : public QObject
     Q_OBJECT
 
 public:
-    enum NoteType {
-        TextNote,
-        SketchNote,
-        AudioNote
-    };
-    Q_ENUM(NoteType)
-
     explicit DatabaseDAO(QObject *parent = nullptr);
 
-    void create(NoteType noteType, QString title, QString media);
+    void create(DTO::DatabaseEntry::NoteType noteType, QString title, QString media);
+
     std::optional<DTO::DatabaseEntry> find(qint64 id);
+
+    QList<DTO::DatabaseEntry> list() const;
+
     void update(qint64 id);
+
     void erase(qint64 id);
 
 private:

@@ -35,7 +35,7 @@ DatabaseDAO::DatabaseDAO(QObject *parent)
         "type INTEGER, title TEXT, media TEXT, created DATETIME, modified DATETIME);");
 }
 
-void DatabaseDAO::create(NoteType noteType, QString title, QString media)
+void DatabaseDAO::create(DTO::DatabaseEntry::NoteType noteType, QString title, QString media)
 {
     qDebug() << "create note" << title << noteType;
 
@@ -48,6 +48,22 @@ void DatabaseDAO::create(NoteType noteType, QString title, QString media)
     query.addBindValue(QDateTime::currentDateTime());
     query.addBindValue(QDateTime::currentDateTime());
     query.exec();
+}
+
+QList<DTO::DatabaseEntry> DatabaseDAO::list() const
+{
+    qDebug() << "list database";
+
+    QSqlQuery query(m_database);
+    query.prepare("SELECT * FROM media");
+    query.exec();
+
+    QList<DTO::DatabaseEntry> list;
+    while(query.next()) {
+        //list.append({});
+    }
+
+    return {};
 }
 
 }

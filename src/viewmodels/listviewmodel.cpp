@@ -26,7 +26,7 @@ QVariant ListViewModel::data(const QModelIndex &index, int role) const
 
     switch(role) {
     case NoteType:
-        return DAO::DatabaseDAO::TextNote;
+        return DTO::DatabaseEntry::TextNote;
 
     default:
         qDebug() << "no such role exist" << role;

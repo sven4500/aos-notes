@@ -33,7 +33,7 @@ void TextNoteModel::create(QString title, QString body)
     textStream << body;
     file.close();
 
-    m_databaseDao->create(DAO::DatabaseDAO::TextNote, title, filePath);
+    m_databaseDao->create(DTO::DatabaseEntry::TextNote, title, filePath);
 }
 
 void TextNoteModel::update(const DTO::TextNote &note)
