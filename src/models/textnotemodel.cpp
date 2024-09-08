@@ -3,7 +3,7 @@
 #include <QTextStream>
 #include <QUuid>
 
-#include "databasemodel.h"
+#include "dao/databasedao.h"
 #include "textnotemodel.h"
 
 namespace Models {
@@ -14,7 +14,7 @@ QDir const TextNoteModel::WorkingDir =
 
 TextNoteModel::TextNoteModel(QObject *parent)
     : QObject(parent)
-    , m_databaseModel(new DatabaseModel(this))
+    , m_databaseDao(new DAO::DatabaseDAO(this))
 {
     qsrand(time(nullptr));
     QDir().mkdir(WorkingDir.path());
@@ -33,7 +33,7 @@ void TextNoteModel::create(QString title, QString body)
     textStream << body;
     file.close();
 
-    m_databaseModel->create(Models::DatabaseModel::TextNote, title, filePath);
+    m_databaseDao->create(DAO::DatabaseDAO::TextNote, title, filePath);
 }
 
 void TextNoteModel::update(const DTO::TextNote &note)

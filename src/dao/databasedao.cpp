@@ -4,14 +4,14 @@
 #include <QSqlQuery>
 #include <QStandardPaths>
 
-#include "databasemodel.h"
+#include "databasedao.h"
 
-namespace Models {
+namespace DAO {
 
-QString const DatabaseModel::DriverName = "QSQLITE";
-QString const DatabaseModel::DatabaseFilename = "notes.sqlite";
+QString const DatabaseDAO::DriverName = "QSQLITE";
+QString const DatabaseDAO::DatabaseFilename = "notes.sqlite";
 
-DatabaseModel::DatabaseModel(QObject *parent)
+DatabaseDAO::DatabaseDAO(QObject *parent)
     : QObject(parent)
 {
     if (!QSqlDatabase::isDriverAvailable(DriverName))
@@ -35,7 +35,7 @@ DatabaseModel::DatabaseModel(QObject *parent)
         "type INTEGER, title TEXT, media TEXT, created DATETIME, modified DATETIME);");
 }
 
-void DatabaseModel::create(NoteType noteType, QString title, QString media)
+void DatabaseDAO::create(NoteType noteType, QString title, QString media)
 {
     qDebug() << "create note" << title << noteType;
 

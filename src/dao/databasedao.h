@@ -9,9 +9,9 @@
 
 #include "dto/databaseentry.h"
 
-namespace Models {
+namespace DAO {
 
-class DatabaseModel : public QObject
+class DatabaseDAO : public QObject
 {
     Q_OBJECT
 
@@ -23,7 +23,7 @@ public:
     };
     Q_ENUM(NoteType)
 
-    explicit DatabaseModel(QObject *parent = nullptr);
+    explicit DatabaseDAO(QObject *parent = nullptr);
 
     void create(NoteType noteType, QString title, QString media);
     std::optional<DTO::DatabaseEntry> find(qint64 id);

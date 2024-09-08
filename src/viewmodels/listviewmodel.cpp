@@ -1,7 +1,7 @@
 #include <QDebug>
 
 #include "listviewmodel.h"
-#include "../models/databasemodel.h"
+#include "dao/databasedao.h"
 
 ListViewModel::ListViewModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -26,7 +26,7 @@ QVariant ListViewModel::data(const QModelIndex &index, int role) const
 
     switch(role) {
     case NoteType:
-        return Models::DatabaseModel::TextNote;
+        return DAO::DatabaseDAO::TextNote;
 
     default:
         qDebug() << "no such role exist" << role;

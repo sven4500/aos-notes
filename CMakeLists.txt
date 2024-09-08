@@ -16,11 +16,11 @@ file(GLOB TsFiles "translations/*.ts")
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(SOURCES
+    src/dao/databasedao.cpp
+    src/dao/databasedao.h
     src/dto/databaseentry.h
     src/dto/textnote.h
     src/main.cpp
-    src/models/databasemodel.cpp
-    src/models/databasemodel.h
     src/models/textnotemodel.cpp
     src/models/textnotemodel.h
     src/viewmodels/listviewmodel.cpp

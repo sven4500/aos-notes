@@ -6,8 +6,11 @@
 
 #include "dto/textnote.h"
 
+namespace DAO {
+class DatabaseDAO;
+}
+
 namespace Models {
-class DatabaseModel;
 
 class TextNoteModel : public QObject
 {
@@ -28,7 +31,7 @@ public:
 private:
     static QDir const WorkingDir;
 
-    DatabaseModel* m_databaseModel = nullptr;
+    DAO::DatabaseDAO* m_databaseDao = nullptr;
 
 };
 
