@@ -9,8 +9,23 @@ Rectangle {
     color: "white"
     //border { width: 1; color: "red" }
 
+    states: [
+        State {
+            name: "NoteDoesntExistState"
+            when: !canRemove
+            PropertyChanges { target: removeButton; visible: false }
+        },
+        State {
+            name: "NoteExistsState"
+            when: canRemove
+            PropertyChanges { target: removeButton; visible: true }
+            AnchorChanges { target: noteTitle; anchors.right: removeButton.left }
+        }
+    ]
+
     // INFO: https://stackoverflow.com/questions/34592916/qml-property-hooks
     property alias noteTitle: noteTitle.text
+    property bool canRemove: false
 
     signal backClicked()
     signal removeClicked()
@@ -30,7 +45,7 @@ Rectangle {
     TextField {
         id: noteTitle
         anchors.left: backButton.right
-        anchors.right: removeButton.left
+        anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
         placeholderText: qsTr("Note title...")
@@ -46,6 +61,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
         image: Qt.resolvedUrl("../icons/bin.svg")
+        visible: false
         onClicked: {
             removeClicked()
             pageStack.pop()

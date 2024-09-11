@@ -8,10 +8,10 @@ Page {
     allowedOrientations: Orientation.All
     showNavigationIndicator: false
 
-    property int identifier: 0
+    property int noteId: 0
 
     Component.onCompleted: {
-        console.log("TextNotePage", identifier, _textNoteViewModel.title)
+        console.log("TextNotePage", noteId, _textNoteViewModel.title)
 
         // INFO: http://imaginativethinking.ca/bi-directional-data-binding-qt-quick/
         header.noteTitle = _textNoteViewModel.title
@@ -21,7 +21,7 @@ Page {
     Binding {
         target: _textNoteViewModel
         property: "id"
-        value: identifier
+        value: noteId
     }
 
     Binding {
@@ -43,6 +43,7 @@ Page {
 
     NoteHeader {
         id: header
+        canRemove: noteId !== 0
         onBackClicked: _textNoteViewModel.saveNote()
         onRemoveClicked: _textNoteViewModel.removeNote()
     }
