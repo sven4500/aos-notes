@@ -1,6 +1,8 @@
 #ifndef TEXTNOTEMODEL_H
 #define TEXTNOTEMODEL_H
 
+#include <optional>
+
 #include <QDir>
 #include <QObject>
 
@@ -24,7 +26,7 @@ public:
     void update(DTO::TextNote const& note);
     void update(qint64 id, QString title, QString body);
 
-    DTO::TextNote find(qint64 id);
+    std::optional<DTO::TextNote> find(qint64 id) const;
 
     void erase(qint64 id);
 

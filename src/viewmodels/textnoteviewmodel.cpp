@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include <QDebug>
 
 #include "models/textnotemodel.h"
@@ -9,17 +10,19 @@ TextNoteViewModel::TextNoteViewModel(Models::TextNoteModel* model, QObject *pare
     : QObject(parent)
     , m_model(model)
 {
-
+    connect(this, &TextNoteViewModel::idChanged,
+            this, &TextNoteViewModel::onIdChanged);
 }
 
 void TextNoteViewModel::saveNote()
 {
-    qDebug() << "save text note" << m_id << m_title << m_body;
+    qDebug() << m_id << m_title << m_body;
 
     if (m_id == 0) {
         if (!m_title.isEmpty() || !m_body.isEmpty()) {
             qDebug() << "create new text note";
-            m_model->create(m_title, m_body);
+            QString const title = tr("New note") + " " + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm");
+            m_model->create(!m_title.isEmpty() ? m_title : title, m_body);
         } else {
             qDebug() << "nothing to save";
         }
@@ -28,19 +31,6 @@ void TextNoteViewModel::saveNote()
         qDebug() << "update text note";
         m_model->update(m_id, m_title, m_body);
     }
-}
-
-const QString &TextNoteViewModel::body() const
-{
-    return m_body;
-}
-
-void TextNoteViewModel::setBody(const QString &newBody)
-{
-    if (m_body == newBody)
-        return;
-    m_body = newBody;
-    emit bodyChanged();
 }
 
 qint64 TextNoteViewModel::id() const
@@ -67,6 +57,35 @@ void TextNoteViewModel::setTitle(const QString &newTitle)
         return;
     m_title = newTitle;
     emit titleChanged();
+}
+
+const QString &TextNoteViewModel::body() const
+{
+    return m_body;
+}
+
+void TextNoteViewModel::setBody(const QString &newBody)
+{
+    if (m_body == newBody)
+        return;
+    m_body = newBody;
+    emit bodyChanged();
+}
+
+void TextNoteViewModel::onIdChanged()
+{
+    if (id() != 0) {
+        std::optional<DTO::TextNote> const textNote = m_model->find(id());
+        if (!textNote) {
+            qDebug() << "no such text note with id" << id();
+            return;
+        }
+        setTitle(textNote->title);
+        setBody(textNote->body);
+    } else {
+        setTitle({});
+        setBody({});
+    }
 }
 
 }

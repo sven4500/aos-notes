@@ -37,6 +37,8 @@ public:
     void setBody(const QString &newBody);
 
 private:
+    void onIdChanged();
+
     qint64 m_id = 0;
     QString m_title;
     QString m_body;

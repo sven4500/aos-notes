@@ -8,12 +8,20 @@ Page {
     allowedOrientations: Orientation.All
     showNavigationIndicator: false
 
-    property int id: 0
+    property int identifier: 0
+
+    Component.onCompleted: {
+        console.log("TextNotePage", identifier, _textNoteViewModel.title)
+
+        // INFO: http://imaginativethinking.ca/bi-directional-data-binding-qt-quick/
+        header.noteTitle = _textNoteViewModel.title
+        textArea.text = _textNoteViewModel.body
+    }
 
     Binding {
         target: _textNoteViewModel
         property: "id"
-        value: id
+        value: identifier
     }
 
     Binding {

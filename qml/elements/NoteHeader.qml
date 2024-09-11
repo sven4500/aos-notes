@@ -9,8 +9,8 @@ Rectangle {
     color: "white"
     //border { width: 1; color: "red" }
 
-    property string noteTitle: noteTitle.text.length !== 0 ? noteTitle.text : defaultNoteTitle
-    readonly property string defaultNoteTitle: qsTr("New note") + " " + Qt.formatDateTime(new Date(), "yyyy.MM.dd hh:mm")
+    // INFO: https://stackoverflow.com/questions/34592916/qml-property-hooks
+    property alias noteTitle: noteTitle.text
 
     signal backClicked()
 
@@ -32,7 +32,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
-        placeholderText: defaultNoteTitle
+        placeholderText: qsTr("Note title...")
         color: "black"
         placeholderColor: "gray"
         labelVisible: false

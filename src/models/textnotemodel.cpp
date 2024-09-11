@@ -4,6 +4,7 @@
 #include <QUuid>
 
 #include "dao/databasedao.h"
+#include "dto/textnote.h"
 #include "textnotemodel.h"
 
 namespace Models {
@@ -33,7 +34,7 @@ void TextNoteModel::create(QString title, QString body)
     textStream << body;
     file.close();
 
-    m_databaseDao->create(DTO::DatabaseEntry::TextNote, title, filePath);
+    m_databaseDao->insert(DTO::DatabaseEntry::TextNote, title, filePath);
 }
 
 void TextNoteModel::update(const DTO::TextNote &note)
@@ -46,9 +47,14 @@ void TextNoteModel::update(qint64 id, QString title, QString body)
 
 }
 
-DTO::TextNote TextNoteModel::find(qint64 id)
+std::optional<DTO::TextNote> TextNoteModel::find(qint64 id) const
 {
-    return {};
+    auto const databaseEntry = m_databaseDao->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such text note with id" << id;
+        return {};
+    }
+    return DTO::TextNote {id, databaseEntry->title, ""};
 }
 
 void TextNoteModel::erase(qint64 id)

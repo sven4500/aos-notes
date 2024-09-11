@@ -28,31 +28,60 @@ DatabaseDAO::DatabaseDAO(QObject *parent)
     if (!m_database.open())
         throw std::runtime_error(QString("failed to open database at location %1").arg(workingDir.path()).toStdString());
 
+    create();
+}
+
+void DatabaseDAO::create()
+{
     // INFO: https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row
     // INFO: https://stackoverflow.com/questions/62434913/how-to-create-a-table-in-qt-with-sqlite
     QSqlQuery query(m_database);
-    query.exec("CREATE TABLE IF NOT EXISTS media (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-        "type INTEGER, title TEXT, media TEXT, created DATETIME, modified DATETIME);");
+    query.exec("CREATE TABLE IF NOT EXISTS media (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, type INTEGER, title TEXT, media TEXT, created DATETIME, modified DATETIME);");
 }
 
-void DatabaseDAO::create(DTO::DatabaseEntry::NoteType noteType, QString title, QString media)
+qint64 DatabaseDAO::insert(DTO::DatabaseEntry::NoteType noteType, QString title, QString media)
 {
-    qDebug() << "create note" << title << noteType;
+    qDebug() << noteType << title << media;
 
     QSqlQuery query(m_database);
-    query.prepare("INSERT INTO media (type, title, media, created, modified) "
-        "VALUES (?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO media (type, title, media, created, modified) VALUES (?, ?, ?, ?, ?)");
     query.addBindValue(noteType);
     query.addBindValue(title);
     query.addBindValue(media);
     query.addBindValue(QDateTime::currentDateTime());
     query.addBindValue(QDateTime::currentDateTime());
     query.exec();
+
+    return {};
+}
+
+std::optional<DTO::DatabaseEntry> DatabaseDAO::find(qint64 id)
+{
+    qDebug() << id;
+
+    QSqlQuery query(m_database);
+    query.prepare("SELECT * FROM media WHERE id = ?");
+    query.addBindValue(id);
+    query.exec();
+
+    if (query.next()) {
+        DTO::DatabaseEntry const entry (
+                    query.value(0).toInt(),
+                    static_cast<DTO::DatabaseEntry::NoteType>(query.value(1).toInt()),
+                    query.value(2).toString(),
+                    query.value(3).toString(),
+                    query.value(4).toDateTime(),
+                    query.value(5).toDateTime());
+        return entry;
+    } else {
+        qDebug() << "no such record found with id" << id;
+        return {};
+    }
 }
 
 QList<DTO::DatabaseEntry> DatabaseDAO::list() const
 {
-    qDebug() << "list database";
+    qDebug();
 
     QSqlQuery query(m_database);
     query.prepare("SELECT * FROM media ORDER BY modified DESC");

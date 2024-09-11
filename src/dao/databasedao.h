@@ -18,15 +18,17 @@ class DatabaseDAO : public QObject
 public:
     explicit DatabaseDAO(QObject *parent = nullptr);
 
-    void create(DTO::DatabaseEntry::NoteType noteType, QString title, QString media);
+    void create();
 
     std::optional<DTO::DatabaseEntry> find(qint64 id);
 
     QList<DTO::DatabaseEntry> list() const;
 
-    void update(qint64 id);
+    qint64 insert(DTO::DatabaseEntry::NoteType noteType, QString title, QString media);
 
-    void erase(qint64 id);
+    void remove(qint64 id);
+
+    void update(qint64 id);
 
 private:
     static const QString DatabaseFilename;
