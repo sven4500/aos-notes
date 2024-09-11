@@ -3,6 +3,7 @@
 
 #include <auroraapp.h>
 
+#include "dto/databaseentry.h"
 #include "models/textnotemodel.h"
 #include "viewmodels/listviewmodel.h"
 #include "viewmodels/textnoteviewmodel.h"
@@ -12,6 +13,8 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
     application->setOrganizationName(QStringLiteral("ru.ivars.rozhleys"));
     application->setApplicationName(QStringLiteral("notes"));
+
+    qmlRegisterUncreatableType<DTO::DatabaseEntry>("DTO", 1, 0, "DatabaseEntry", "DTO can not be created on QML side");
 
     auto const textNoteModel = new Models::TextNoteModel(&*application);
     // TODO: sketchNoteModel

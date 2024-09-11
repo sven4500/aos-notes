@@ -1,15 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Rectangle {
+Item {
     id: root
-    width: Theme.itemSizeMedium
-    height: Theme.itemSizeExtraLarge
-    radius: 20
-    border.color: "gray"
-    border.width: 2
-
-    property real maxHeight: Theme.itemSizeExtraLarge
+    anchors.fill: parent
+    clip: true
 
     Text {
         anchors.left: parent.left

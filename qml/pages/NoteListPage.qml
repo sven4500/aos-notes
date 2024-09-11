@@ -51,10 +51,8 @@ Page {
             property int columnCount: 2
 
             Repeater {
-                id: repeater
                 model: _listViewModel
-                delegate: Note {
-                    id: note
+                delegate: NotePreview {
                     width: flow.width * 0.5 - flow.spacing * (flow.columnCount - 1)
                 }
             }
