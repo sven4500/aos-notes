@@ -7,7 +7,7 @@ import "../elements"
 Rectangle {
     id: root
     width: Theme.itemSizeMedium
-    height: Theme.itemSizeExtraLarge
+    height: Theme.itemSizeHuge * 1.5
     radius: 20
     border.color: "gray"
     border.width: 2
@@ -32,6 +32,8 @@ Rectangle {
 
     TextNotePreview {
         id: textNotePreview
+        anchors.fill: parent
+        anchors.margins: Theme.paddingMedium
         visible: false
 
         MouseArea {

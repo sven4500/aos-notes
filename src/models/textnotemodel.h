@@ -21,14 +21,13 @@ class TextNoteModel : public QObject
 public:
     explicit TextNoteModel(QObject *parent = nullptr);
 
-    void create(QString title, QString body);
-
-    void update(DTO::TextNote const& note);
-    void update(qint64 id, QString title, QString body);
-
     std::optional<DTO::TextNote> find(qint64 id) const;
 
-    void erase(qint64 id);
+    void insert(QString title, QString body);
+
+    void remove(qint64 id);
+
+    void update(qint64 id, QString title, QString body);
 
 private:
     static QDir const WorkingDir;

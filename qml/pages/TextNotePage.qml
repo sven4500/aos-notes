@@ -44,6 +44,7 @@ Page {
     NoteHeader {
         id: header
         onBackClicked: _textNoteViewModel.saveNote()
+        onRemoveClicked: _textNoteViewModel.removeNote()
     }
 
     TextArea {
@@ -53,7 +54,7 @@ Page {
         anchors.bottom: parent.bottom
         anchors.margins: Theme.paddingMedium
         backgroundStyle: TextEditor.NoBackground
-        placeholderText: qsTr("Enter text...")
+        placeholderText: qsTr("Note text...")
         placeholderColor: "gray"
         color: "black"
     }

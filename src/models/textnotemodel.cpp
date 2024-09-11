@@ -21,7 +21,7 @@ TextNoteModel::TextNoteModel(QObject *parent)
     QDir().mkdir(WorkingDir.path());
 }
 
-void TextNoteModel::create(QString title, QString body)
+void TextNoteModel::insert(QString title, QString body)
 {
     auto const uuid = QUuid::createUuid();
     QString const filePath = WorkingDir.filePath(uuid.toString() + ".txt");
@@ -37,11 +37,6 @@ void TextNoteModel::create(QString title, QString body)
     m_databaseDao->insert(DTO::DatabaseEntry::TextNote, title, filePath);
 }
 
-void TextNoteModel::update(const DTO::TextNote &note)
-{
-
-}
-
 void TextNoteModel::update(qint64 id, QString title, QString body)
 {
 
@@ -54,12 +49,22 @@ std::optional<DTO::TextNote> TextNoteModel::find(qint64 id) const
         qDebug() << "no such text note with id" << id;
         return {};
     }
+
     return DTO::TextNote {id, databaseEntry->title, ""};
 }
 
-void TextNoteModel::erase(qint64 id)
+void TextNoteModel::remove(qint64 id)
 {
+    auto const databaseEntry = m_databaseDao->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such text note found with id" << id;
+        return;
+    }
 
+    m_databaseDao->remove(id);
+
+    QFile file(databaseEntry->media);
+    file.remove();
 }
 
 }

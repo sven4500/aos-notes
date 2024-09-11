@@ -25,7 +25,8 @@ public:
 
     explicit TextNoteViewModel(Models::TextNoteModel* model = nullptr, QObject *parent = nullptr);
 
-    Q_INVOKABLE virtual void saveNote();
+    Q_INVOKABLE void saveNote();
+    Q_INVOKABLE void removeNote();
 
     qint64 id() const;
     void setId(qint64 newId);

@@ -13,6 +13,7 @@ Rectangle {
     property alias noteTitle: noteTitle.text
 
     signal backClicked()
+    signal removeClicked()
 
     ImageButton {
         id: backButton
@@ -29,7 +30,7 @@ Rectangle {
     TextField {
         id: noteTitle
         anchors.left: backButton.right
-        anchors.right: parent.right
+        anchors.right: removeButton.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: Theme.paddingMedium
         placeholderText: qsTr("Note title...")
@@ -37,5 +38,17 @@ Rectangle {
         placeholderColor: "gray"
         labelVisible: false
         backgroundStyle: TextEditor.UnderlineBackground
+    }
+
+    ImageButton {
+        id: removeButton
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.margins: Theme.paddingMedium
+        image: Qt.resolvedUrl("../icons/bin.svg")
+        onClicked: {
+            removeClicked()
+            pageStack.pop()
+        }
     }
 }

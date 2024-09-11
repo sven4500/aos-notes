@@ -18,18 +18,29 @@ void TextNoteViewModel::saveNote()
 {
     qDebug() << m_id << m_title << m_body;
 
-    if (m_id == 0) {
+    if (m_id != 0) {
+        qDebug() << "update text note";
+        m_model->update(m_id, m_title, m_body);
+    }
+    else {
         if (!m_title.isEmpty() || !m_body.isEmpty()) {
             qDebug() << "create new text note";
             QString const title = tr("New note") + " " + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm");
-            m_model->create(!m_title.isEmpty() ? m_title : title, m_body);
+            m_model->insert(!m_title.isEmpty() ? m_title : title, m_body);
         } else {
             qDebug() << "nothing to save";
         }
     }
-    else {
-        qDebug() << "update text note";
-        m_model->update(m_id, m_title, m_body);
+}
+
+void TextNoteViewModel::removeNote()
+{
+    qDebug() << m_id;
+
+    if (m_id != 0) {
+        m_model->remove(m_id);
+    } else {
+        qDebug() << "can not remove temporary note";
     }
 }
 

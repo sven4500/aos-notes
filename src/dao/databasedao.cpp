@@ -55,6 +55,16 @@ qint64 DatabaseDAO::insert(DTO::DatabaseEntry::NoteType noteType, QString title,
     return {};
 }
 
+void DatabaseDAO::remove(qint64 id)
+{
+    qDebug() << id;
+
+    QSqlQuery query(m_database);
+    query.prepare("DELETE FROM media WHERE id = ?");
+    query.addBindValue(id);
+    query.exec();
+}
+
 std::optional<DTO::DatabaseEntry> DatabaseDAO::find(qint64 id)
 {
     qDebug() << id;

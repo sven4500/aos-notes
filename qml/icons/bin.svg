@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg1890"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="bin.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1892"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="5.8012346"
+     inkscape:cx="-1.723771"
+     inkscape:cy="24.046606"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1887" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       d="m 6.9737555,1.9830522 c 0.688181,0 1.2477751,0.5609166 1.2477751,1.2488333 H 10.093193 V 3.8536563 H 2.6068074 V 3.2318855 h 1.8716621 c 0,-0.6879167 0.559594,-1.2488333 1.247511,-1.2488333 z m 0,0.6244166 h -1.247775 c -0.343694,0 -0.623623,0.2804584 -0.623623,0.6244167 h 2.495285 c 0,-0.3439583 -0.279929,-0.6244167 -0.623887,-0.6244167 z m 1.2477751,7.4850622 c 0.3436929,0 0.623887,-0.2804582 0.623887,-0.6244162 V 4.478073 h 0.6236229 v 4.9900418 c 0,0.6879162 -0.559329,1.2488332 -1.24751,1.2488332 h -3.743325 c -0.687917,0 -1.247511,-0.560917 -1.247511,-1.2488332 V 4.478073 h 0.623888 v 4.9900418 c 0,0.343958 0.279929,0.6244162 0.623623,0.6244162 z M 5.7204235,4.7902813 h -0.623622 v 4.0560625 h 0.623622 z m 1.253332,0 h 0.623887 v 4.0560625 h -0.623887 z"
+       fill="#000000"
+       id="path160"
+       style="stroke-width:0.264583;fill:#000000;fill-opacity:1" />
+  </g>
+</svg>
