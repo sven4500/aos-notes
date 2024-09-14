@@ -3,13 +3,18 @@
 #include "dao/databasedao.h"
 #include "listviewmodel.h"
 
-ListViewModel::ListViewModel(QObject *parent)
+ListViewModel::ListViewModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
     : QAbstractListModel(parent)
-    , m_databaseDAO(new DAO::DatabaseDAO(this))
+    , m_databaseDAO(databaseDAO)
 {
     srand(time(nullptr));
 
     m_notes = m_databaseDAO->list();
+    connect(m_databaseDAO, &DAO::DatabaseDAO::inserted,
+            this, &ListViewModel::onNoteInserted);
+    connect(m_databaseDAO, &DAO::DatabaseDAO::removed,
+            this, &ListViewModel::onNoteRemoved);
+
     qDebug() << "notes loaded" << m_notes.size();
 
     // INFO: https://stackoverflow.com/questions/51728264/model-rowcount-wont-bind-to-items-property
@@ -71,31 +76,40 @@ QHash<int, QByteArray> ListViewModel::roleNames() const
     };
 }
 
-bool ListViewModel::removeRows(int row, int count, const QModelIndex &parent)
+void ListViewModel::onNoteInserted(qint64 id)
 {
-    qDebug() << row << count;
+    qDebug() << id;
 
-    if (row >= m_notes.size()) {
-        qDebug() << "row out of bounds" << m_notes.size();
-        return false;
+    auto const& note = m_databaseDAO->find(id);
+    if (!note) {
+        qDebug() << "no note found with id" << id;
+        return;
     }
 
-    if (count <= 0) {
-        qDebug() << "nothing to remove" << count;
-        return false;
+    int const i = 0;
+
+    beginInsertRows(QModelIndex(), i, i);
+    m_notes.insert(i, *note);
+    endInsertRows();
+
+    qDebug() << "note inserted at row" << i;
+}
+
+void ListViewModel::onNoteRemoved(qint64 id)
+{
+    qDebug() << id;
+
+    auto const& note = std::find_if(m_notes.begin(), m_notes.end(), [&id](auto const& entry){ return entry.id == id; });
+    if (note == m_notes.end()) {
+        qDebug() << "no note found with id" << id;
+        return;
     }
 
-    if (row + count > m_notes.size()) {
-        count = m_notes.size() - row;
-        qDebug() << "too many rows to remove, new row count" << count;
-    }
+    int const i = std::distance(m_notes.begin(), note);
 
-    beginRemoveRows(parent, row, row + count - 1);
-    for (auto i = 0; i < count; ++i) {
-        auto const note = m_notes.takeAt(row);
-        m_databaseDAO->remove(note.id);
-    }
+    beginRemoveRows(QModelIndex(), i, i);
+    m_notes.removeAt(i);
     endRemoveRows();
 
-    return true;
+    qDebug() << "note removed at row" << i;
 }

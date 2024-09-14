@@ -31,13 +31,15 @@ public:
     // INFO: https://stackoverflow.com/questions/51728264/model-rowcount-wont-bind-to-items-property
     Q_PROPERTY(int length READ rowCount NOTIFY rowCountChanged)
 
-    explicit ListViewModel(QObject *parent = nullptr);
+    explicit ListViewModel(DAO::DatabaseDAO* databaseDAO, QObject *parent = nullptr);
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual QHash<int, QByteArray> roleNames() const;
 
-    Q_INVOKABLE virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+private slots:
+    void onNoteInserted(qint64 id);
+    void onNoteRemoved(qint64 id);
 
 private:
     QList<DTO::DatabaseEntry> m_notes;

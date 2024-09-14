@@ -14,7 +14,7 @@ TextNoteViewModel::TextNoteViewModel(Models::TextNoteModel* model, QObject *pare
             this, &TextNoteViewModel::onIdChanged);
 }
 
-void TextNoteViewModel::saveNote()
+void TextNoteViewModel::insertNote()
 {
     qDebug() << m_id << m_title << m_body;
 

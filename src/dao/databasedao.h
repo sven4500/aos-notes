@@ -15,6 +15,10 @@ class DatabaseDAO : public QObject
 {
     Q_OBJECT
 
+signals:
+    void removed(qint64 id);
+    void inserted(qint64 id);
+
 public:
     explicit DatabaseDAO(QObject *parent = nullptr);
 

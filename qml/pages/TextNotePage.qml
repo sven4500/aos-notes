@@ -45,11 +45,8 @@ Page {
     NoteHeader {
         id: header
         canRemove: noteId !== 0
-        onBackClicked: _textNoteViewModel.saveNote()
-        onRemoveClicked: {
-            _textNoteViewModel.removeNote()
-            _listViewModel.removeRows(index, 1)
-        }
+        onBackClicked: _textNoteViewModel.insertNote()
+        onRemoveClicked: _textNoteViewModel.removeNote()
     }
 
     TextArea {

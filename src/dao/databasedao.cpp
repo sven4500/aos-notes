@@ -33,6 +33,8 @@ DatabaseDAO::DatabaseDAO(QObject *parent)
 
 void DatabaseDAO::create()
 {
+    qDebug();
+
     // INFO: https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row
     // INFO: https://stackoverflow.com/questions/62434913/how-to-create-a-table-in-qt-with-sqlite
     QSqlQuery query(m_database);
@@ -52,7 +54,10 @@ qint64 DatabaseDAO::insert(DTO::DatabaseEntry::NoteType noteType, QString title,
     query.addBindValue(QDateTime::currentDateTime());
     query.exec();
 
-    return {};
+    auto const insertId = query.lastInsertId().toLongLong();
+
+    emit inserted(insertId);
+    return insertId;
 }
 
 void DatabaseDAO::remove(qint64 id)
@@ -63,6 +68,13 @@ void DatabaseDAO::remove(qint64 id)
     query.prepare("DELETE FROM media WHERE id = ?");
     query.addBindValue(id);
     query.exec();
+
+    // NOTE: returns -1 if method is not supported
+    // INFO: https://doc.qt.io/qt-6/qsqlquery.html#numRowsAffected
+    if (query.numRowsAffected() > 0) {
+        qDebug() << "rows removed" << query.numRowsAffected();
+        emit removed(id);
+    }
 }
 
 std::optional<DTO::DatabaseEntry> DatabaseDAO::find(qint64 id)

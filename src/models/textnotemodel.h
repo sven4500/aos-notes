@@ -19,7 +19,7 @@ class TextNoteModel : public QObject
     Q_OBJECT
 
 public:
-    explicit TextNoteModel(QObject *parent = nullptr);
+    explicit TextNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent = nullptr);
 
     std::optional<DTO::TextNote> find(qint64 id) const;
 

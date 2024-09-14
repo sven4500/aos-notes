@@ -13,9 +13,9 @@ QDir const TextNoteModel::WorkingDir =
         QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) +
         QDir::separator() + "notes" + QDir::separator() + "text";
 
-TextNoteModel::TextNoteModel(QObject *parent)
+TextNoteModel::TextNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
     : QObject(parent)
-    , m_databaseDao(new DAO::DatabaseDAO(this))
+    , m_databaseDao(databaseDAO)
 {
     qsrand(time(nullptr));
     QDir().mkdir(WorkingDir.path());
