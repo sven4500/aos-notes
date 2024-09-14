@@ -40,7 +40,7 @@ Rectangle {
             id: mouseArea
             anchors.fill: parent
             onClicked: pageStack.push("../pages/TextNotePage.qml",
-                                      {noteId: model.id})
+                                      {noteId: model.id, index: model.index})
         }
     }
 }

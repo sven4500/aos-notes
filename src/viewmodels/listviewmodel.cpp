@@ -70,3 +70,32 @@ QHash<int, QByteArray> ListViewModel::roleNames() const
         {ModifiedAtRole, "modifiedAt"}
     };
 }
+
+bool ListViewModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    qDebug() << row << count;
+
+    if (row >= m_notes.size()) {
+        qDebug() << "row out of bounds" << m_notes.size();
+        return false;
+    }
+
+    if (count <= 0) {
+        qDebug() << "nothing to remove" << count;
+        return false;
+    }
+
+    if (row + count > m_notes.size()) {
+        count = m_notes.size() - row;
+        qDebug() << "too many rows to remove, new row count" << count;
+    }
+
+    beginRemoveRows(parent, row, row + count - 1);
+    for (auto i = 0; i < count; ++i) {
+        auto const note = m_notes.takeAt(row);
+        m_databaseDAO->remove(note.id);
+    }
+    endRemoveRows();
+
+    return true;
+}

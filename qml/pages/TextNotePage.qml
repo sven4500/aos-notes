@@ -9,6 +9,7 @@ Page {
     showNavigationIndicator: false
 
     property int noteId: 0
+    property int index: 0
 
     Component.onCompleted: {
         console.log("TextNotePage", noteId, _textNoteViewModel.title)
@@ -45,7 +46,10 @@ Page {
         id: header
         canRemove: noteId !== 0
         onBackClicked: _textNoteViewModel.saveNote()
-        onRemoveClicked: _textNoteViewModel.removeNote()
+        onRemoveClicked: {
+            _textNoteViewModel.removeNote()
+            _listViewModel.removeRows(index, 1)
+        }
     }
 
     TextArea {

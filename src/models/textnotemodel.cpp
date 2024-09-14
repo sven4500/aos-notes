@@ -24,7 +24,7 @@ TextNoteModel::TextNoteModel(QObject *parent)
 void TextNoteModel::insert(QString title, QString body)
 {
     auto const uuid = QUuid::createUuid();
-    QString const filePath = WorkingDir.filePath(uuid.toString() + ".txt");
+    QString const filePath = WorkingDir.filePath(uuid.toString().remove('{').remove('}') + ".txt");
     QFile file(filePath);
     if(!file.open(QFile::WriteOnly | QFile::Truncate)) {
         qDebug() << "failed to open file" << filePath;
