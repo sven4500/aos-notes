@@ -50,7 +50,15 @@ std::optional<DTO::TextNote> TextNoteModel::find(qint64 id) const
         return {};
     }
 
-    return DTO::TextNote {id, databaseEntry->title, ""};
+    QFile file(databaseEntry->media);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug() << "failed to open text file" << databaseEntry->media;
+    }
+
+    QTextStream textStream(&file);
+    auto const body = textStream.readAll();
+
+    return DTO::TextNote {id, databaseEntry->title, body};
 }
 
 void TextNoteModel::remove(qint64 id)
