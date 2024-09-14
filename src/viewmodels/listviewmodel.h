@@ -11,6 +11,8 @@ namespace DAO {
 class DatabaseDAO;
 }
 
+namespace ViewModels {
+
 class ListViewModel: public QAbstractListModel
 {
     Q_OBJECT
@@ -46,5 +48,7 @@ private:
     DAO::DatabaseDAO* m_databaseDAO = nullptr;
 
 };
+
+}
 
 #endif

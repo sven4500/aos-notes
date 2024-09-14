@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     // TODO: sketchNoteModel
     // TODO: audioNoteModel
 
-    auto const listViewModel = new ListViewModel(databaseDAO, &*application);
+    auto const listViewModel = new ViewModels::ListViewModel(databaseDAO, &*application);
     auto const textNoteViewModel = new ViewModels::TextNoteViewModel(textNoteModel, &*application);
     // TODO: sketchNoteViewModel
     // TODO: audioNoteViewModel

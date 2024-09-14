@@ -3,6 +3,8 @@
 #include "dao/databasedao.h"
 #include "listviewmodel.h"
 
+namespace ViewModels {
+
 ListViewModel::ListViewModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
     : QAbstractListModel(parent)
     , m_databaseDAO(databaseDAO)
@@ -112,4 +114,6 @@ void ListViewModel::onNoteRemoved(qint64 id)
     endRemoveRows();
 
     qDebug() << "note removed at row" << i;
+}
+
 }
