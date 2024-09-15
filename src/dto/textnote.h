@@ -7,9 +7,10 @@ namespace DTO {
 
 struct TextNote
 {
-    qint64 id;
+    qint64 id = 0;
     QString title;
     QString body;
+
 };
 
 }

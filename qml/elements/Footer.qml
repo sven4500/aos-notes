@@ -34,5 +34,6 @@ Rectangle {
         anchors.leftMargin: Theme.paddingMedium
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/tape.svg")
+        onClicked: pageStack.push(Qt.resolvedUrl("../pages/AudioNotePage.qml"))
     }
 }

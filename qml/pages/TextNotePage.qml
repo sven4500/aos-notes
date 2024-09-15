@@ -9,7 +9,6 @@ Page {
     showNavigationIndicator: false
 
     property int noteId: 0
-    property int index: 0
 
     Component.onCompleted: {
         console.log("TextNotePage", noteId, _textNoteViewModel.title)

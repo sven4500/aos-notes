@@ -13,13 +13,19 @@ struct DatabaseEntry
 
 public:
     enum NoteType {
+        Undefined,
         TextNote,
         SketchNote,
         AudioNote
     };
     Q_ENUM(NoteType)
 
-    explicit DatabaseEntry(qint64 id, NoteType type, QString title, QString media, QDateTime createdAt, QDateTime modifiedAt)
+    explicit DatabaseEntry(qint64 id,
+                           NoteType type,
+                           QString title,
+                           QString media,
+                           QDateTime createdAt,
+                           QDateTime modifiedAt)
         : id(id)
         , type(type)
         , title(title)
@@ -30,12 +36,12 @@ public:
 
     }
 
-    qint64 id;
-    NoteType type;
+    qint64 id = 0;
+    NoteType type = Undefined;
     QString title;
     QString media;
-    QDateTime createdAt;
-    QDateTime modifiedAt;
+    QDateTime createdAt = QDateTime::currentDateTimeUtc();
+    QDateTime modifiedAt = QDateTime::currentDateTimeUtc();
 
 };
 
