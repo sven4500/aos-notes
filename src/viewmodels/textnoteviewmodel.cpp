@@ -51,8 +51,8 @@ qint64 TextNoteViewModel::id() const
 
 void TextNoteViewModel::setId(qint64 newId)
 {
-    if (m_id == newId)
-        return;
+    qDebug() << "set new id" << newId;
+    // INFO: always set new id because of bidirectional binding on Qml side
     m_id = newId;
     emit idChanged();
 }
@@ -64,6 +64,7 @@ const QString &TextNoteViewModel::title() const
 
 void TextNoteViewModel::setTitle(const QString &newTitle)
 {
+    qDebug() << "set new title" << newTitle;
     if (m_title == newTitle)
         return;
     m_title = newTitle;
