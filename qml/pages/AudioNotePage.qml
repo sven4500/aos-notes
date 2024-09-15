@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import Managers 1.0
 import "../elements"
 
 Page {
@@ -9,6 +10,11 @@ Page {
     showNavigationIndicator: false
 
     property int noteId: 0
+
+    AudioRecorder {
+        id: recorder
+        outputLocation: _audioNoteViewModel.outputLocation
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -39,6 +45,10 @@ Page {
         anchors.top: slider.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.margins: Theme.paddingMedium
+        radius: height * 0.5
         image: Qt.resolvedUrl("../icons/microphone.svg")
+        onClicked: recorder.state === AudioRecorder.RecordingState ?
+                       recorder.pause() :
+                       recorder.record()
     }
 }

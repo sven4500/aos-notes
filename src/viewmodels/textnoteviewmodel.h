@@ -21,7 +21,7 @@ signals:
 public:
     Q_PROPERTY(QString body READ body WRITE setBody NOTIFY bodyChanged)
 
-    explicit TextNoteViewModel(Models::TextNoteModel* model = nullptr, QObject *parent = nullptr);
+    explicit TextNoteViewModel(Models::TextNoteModel* model, QObject *parent = nullptr);
 
     Q_INVOKABLE virtual void insertNote();
     Q_INVOKABLE virtual void removeNote();

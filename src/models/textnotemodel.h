@@ -29,9 +29,9 @@ public:
 
     void update(qint64 id, QString title, QString body);
 
-private:
     static QDir const WorkingDir;
 
+private:
     DAO::DatabaseDAO* m_databaseDao = nullptr;
 
 };

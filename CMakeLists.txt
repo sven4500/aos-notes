@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(ru.ivars.rozhleys.notes CXX)
 
-find_package (Qt5 COMPONENTS Core Network Qml Gui Quick LinguistTools Sql REQUIRED)
+find_package (Qt5 COMPONENTS Core Network Qml Gui Quick LinguistTools Sql Multimedia REQUIRED)
 
 include(FindPkgConfig)
 pkg_search_module(AURORA auroraapp REQUIRED)
@@ -16,13 +16,19 @@ file(GLOB TsFiles "translations/*.ts")
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(SOURCES
+    src/audiorecorder.cpp
+    src/audiorecorder.h
     src/dao/databasedao.cpp
     src/dao/databasedao.h
     src/dto/databaseentry.h
     src/dto/textnote.h
     src/main.cpp
+    src/models/audionotemodel.cpp
+    src/models/audionotemodel.h
     src/models/textnotemodel.cpp
     src/models/textnotemodel.h
+    src/viewmodels/audionoteviewmodel.cpp
+    src/viewmodels/audionoteviewmodel.h
     src/viewmodels/listviewmodel.cpp
     src/viewmodels/listviewmodel.h
     src/viewmodels/noteviewmodel.cpp
@@ -47,6 +53,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt5::Quick
     Qt5::Sql
+    Qt5::Multimedia
     ${AURORA_LDFLAGS}
 )
 

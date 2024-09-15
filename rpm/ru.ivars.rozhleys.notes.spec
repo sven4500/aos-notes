@@ -7,6 +7,10 @@ URL:        https://gitlab.com/sven4500/aurora-notes
 Source0:    %{name}-%{version}.tar.bz2
 
 Requires:   sailfishsilica-qt5 >= 0.10.9
+#Requires:  qt5-qtmultimedia-plugin-mediaservice-gstmediaplayer
+#Requires:  qt5-qtmultimedia-plugin-mediaservice-gstmediacapture
+#Requires:  qt5-qtdeclarative-import-multimedia
+#Requires:  qt5-qtmultimedia
 BuildRequires:  pkgconfig(auroraapp)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
