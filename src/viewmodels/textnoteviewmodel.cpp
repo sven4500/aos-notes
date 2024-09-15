@@ -7,7 +7,7 @@
 namespace ViewModels {
 
 TextNoteViewModel::TextNoteViewModel(Models::TextNoteModel* model, QObject *parent)
-    : QObject(parent)
+    : NoteViewModel(parent)
     , m_model(model)
 {
     connect(this, &TextNoteViewModel::idChanged,
@@ -42,33 +42,6 @@ void TextNoteViewModel::removeNote()
     } else {
         qDebug() << "can not remove temporary note";
     }
-}
-
-qint64 TextNoteViewModel::id() const
-{
-    return m_id;
-}
-
-void TextNoteViewModel::setId(qint64 newId)
-{
-    qDebug() << "set new id" << newId;
-    // INFO: always set new id because of bidirectional binding on Qml side
-    m_id = newId;
-    emit idChanged();
-}
-
-const QString &TextNoteViewModel::title() const
-{
-    return m_title;
-}
-
-void TextNoteViewModel::setTitle(const QString &newTitle)
-{
-    qDebug() << "set new title" << newTitle;
-    if (m_title == newTitle)
-        return;
-    m_title = newTitle;
-    emit titleChanged();
 }
 
 const QString &TextNoteViewModel::body() const

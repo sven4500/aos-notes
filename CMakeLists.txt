@@ -25,6 +25,8 @@ set(SOURCES
     src/models/textnotemodel.h
     src/viewmodels/listviewmodel.cpp
     src/viewmodels/listviewmodel.h
+    src/viewmodels/noteviewmodel.cpp
+    src/viewmodels/noteviewmodel.h
     src/viewmodels/textnoteviewmodel.cpp
     src/viewmodels/textnoteviewmodel.h
 )
