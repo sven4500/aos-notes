@@ -39,7 +39,23 @@ void TextNoteModel::insert(QString title, QString body)
 
 void TextNoteModel::update(qint64 id, QString title, QString body)
 {
+    qDebug() << id << title << body;
 
+    auto const databaseEntry = m_databaseDao->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such text note with id" << id;
+        return;
+    }
+
+    QFile file(databaseEntry->media);
+    if (file.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream textStream(&file);
+        textStream << body;
+    } else {
+        qDebug() << "failed to open text file" << databaseEntry->media;
+    }
+
+    m_databaseDao->update(id, title);
 }
 
 std::optional<DTO::TextNote> TextNoteModel::find(qint64 id) const

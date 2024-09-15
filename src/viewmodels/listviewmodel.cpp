@@ -16,6 +16,8 @@ ListViewModel::ListViewModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
             this, &ListViewModel::onNoteInserted);
     connect(m_databaseDAO, &DAO::DatabaseDAO::removed,
             this, &ListViewModel::onNoteRemoved);
+    connect(m_databaseDAO, &DAO::DatabaseDAO::updated,
+            this, &ListViewModel::onNoteUpdated);
 
     qDebug() << "notes loaded" << m_notes.size();
 
@@ -82,8 +84,8 @@ void ListViewModel::onNoteInserted(qint64 id)
 {
     qDebug() << id;
 
-    auto const& note = m_databaseDAO->find(id);
-    if (!note) {
+    auto const& entry = m_databaseDAO->find(id);
+    if (!entry) {
         qDebug() << "no note found with id" << id;
         return;
     }
@@ -91,7 +93,7 @@ void ListViewModel::onNoteInserted(qint64 id)
     int const i = 0;
 
     beginInsertRows(QModelIndex(), i, i);
-    m_notes.insert(i, *note);
+    m_notes.insert(i, *entry);
     endInsertRows();
 
     qDebug() << "note inserted at row" << i;
@@ -109,11 +111,43 @@ void ListViewModel::onNoteRemoved(qint64 id)
 
     int const i = std::distance(m_notes.begin(), note);
 
+    if (i >= m_notes.size()) {
+        qDebug() << "out of range index" << i;
+        return;
+    }
+
     beginRemoveRows(QModelIndex(), i, i);
     m_notes.removeAt(i);
     endRemoveRows();
 
     qDebug() << "note removed at row" << i;
+}
+
+void ListViewModel::onNoteUpdated(qint64 id)
+{
+    qDebug() << id;
+
+    auto const& entry = m_databaseDAO->find(id);
+    if (!entry) {
+        qDebug() << "no note found with id" << id;
+        return;
+    }
+
+    auto const& note = std::find_if(m_notes.begin(), m_notes.end(), [&id](auto const& entry){ return entry.id == id; });
+    if (note == m_notes.end()) {
+        qDebug() << "no note found with id" << id;
+        return;
+    }
+
+    int const i = std::distance(m_notes.begin(), note);
+
+    note->title = entry->title;
+    note->modifiedAt = entry->modifiedAt;
+
+    // INFO: https://stackoverflow.com/questions/43494905/how-to-update-qabstractitemmodel-view-when-a-data-is-updated
+    emit dataChanged(createIndex(i, 0), createIndex(i, 0), {TitleRole, ModifiedAtRole});
+
+    qDebug() << "note updated at row" << i << note->id << note->title << note->modifiedAt;
 }
 
 }

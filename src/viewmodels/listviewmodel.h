@@ -42,6 +42,7 @@ public:
 private slots:
     void onNoteInserted(qint64 id);
     void onNoteRemoved(qint64 id);
+    void onNoteUpdated(qint64 id);
 
 private:
     QList<DTO::DatabaseEntry> m_notes;

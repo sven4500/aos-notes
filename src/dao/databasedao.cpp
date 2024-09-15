@@ -77,6 +77,23 @@ void DatabaseDAO::remove(qint64 id)
     }
 }
 
+void DatabaseDAO::update(qint64 id, QString title)
+{
+    qDebug() << id << title;
+
+    QSqlQuery query(m_database);
+    query.prepare("UPDATE media SET title = ?, modified = ? WHERE id = ?");
+    query.addBindValue(title);
+    query.addBindValue(QDateTime::currentDateTime());
+    query.addBindValue(id);
+    query.exec();
+
+    if (query.numRowsAffected() > 0) {
+        qDebug() << "rows updated" << query.numRowsAffected();
+        emit updated(id);
+    }
+}
+
 std::optional<DTO::DatabaseEntry> DatabaseDAO::find(qint64 id)
 {
     qDebug() << id;
