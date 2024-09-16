@@ -5,8 +5,10 @@ Rectangle {
     id: root
     width: Theme.itemSizeHuge
     height: Theme.itemSizeExtraSmall * 0.35
+    color: "transparent"
     //border { color: "red" }
 
+    property alias enabled: mouseArea.enabled
     property int value: 0
     property int maxValue: 100
 
@@ -35,6 +37,7 @@ Rectangle {
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         onClicked: root.value = root.maxValue * (mouse.x / width)
     }
