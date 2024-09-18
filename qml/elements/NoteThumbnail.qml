@@ -16,7 +16,7 @@ Rectangle {
         State {
             name: "TextNoteState"
             when: model.type === DatabaseEntry.TextNote
-            PropertyChanges { target: textNotePreview; visible: true }
+            PropertyChanges { target: textNoteThumbnail; visible: true }
         },
         State {
             name: "SketchNoteState"
@@ -30,8 +30,8 @@ Rectangle {
 
     property real maxHeight: Theme.itemSizeExtraLarge
 
-    TextNotePreview {
-        id: textNotePreview
+    TextNoteThumbnail {
+        id: textNoteThumbnail
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         visible: false

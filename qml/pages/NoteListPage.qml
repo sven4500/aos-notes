@@ -52,7 +52,7 @@ Page {
 
             Repeater {
                 model: _listViewModel
-                delegate: NotePreview {
+                delegate: NoteThumbnail {
                     width: flow.width * 0.5 - flow.spacing * (flow.columnCount - 1)
                 }
             }
