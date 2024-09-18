@@ -20,6 +20,7 @@ set(SOURCES
     src/audiorecorder.h
     src/dao/databasedao.cpp
     src/dao/databasedao.h
+    src/dto/audionote.h
     src/dto/databaseentry.h
     src/dto/textnote.h
     src/main.cpp

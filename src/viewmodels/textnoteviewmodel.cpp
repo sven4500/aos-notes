@@ -25,8 +25,7 @@ void TextNoteViewModel::insertNote()
     else {
         if (!m_title.isEmpty() || !m_body.isEmpty()) {
             qDebug() << "create new text note";
-            QString const title = tr("New note") + " " + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm");
-            m_model->insert(!m_title.isEmpty() ? m_title : title, m_body);
+            m_model->insert(!m_title.isEmpty() ? m_title : defaultTitle(), m_body);
         } else {
             qDebug() << "nothing to save";
         }
@@ -35,7 +34,7 @@ void TextNoteViewModel::insertNote()
 
 void TextNoteViewModel::removeNote()
 {
-    qDebug() << m_id;
+    qDebug() << m_id << m_title << m_body;
 
     if (m_id != 0) {
         m_model->remove(m_id);

@@ -30,6 +30,8 @@ public:
     void setTitle(const QString &newTitle);
 
 protected:
+    static QString defaultTitle();
+
     qint64 m_id = 0;
     QString m_title;
 

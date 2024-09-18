@@ -1,4 +1,7 @@
+#include <QDebug>
+#include <QFile>
 #include <QStandardPaths>
+#include <QUuid>
 
 #include "audionotemodel.h"
 #include "dao/databasedao.h"
@@ -17,6 +20,48 @@ AudioNoteModel::AudioNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
 {
     qsrand(time(nullptr));
     QDir().mkdir(WorkingDir.path());
+}
+
+std::optional<DTO::AudioNote> AudioNoteModel::find(qint64 id) const
+{
+    qDebug() << id;
+
+    auto const databaseEntry = m_databaseDAO->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such audio note found with id" << id;
+        return {};
+    }
+
+    return DTO::AudioNote {id, databaseEntry->title, databaseEntry->media};
+}
+
+void AudioNoteModel::insert(QString title)
+{
+    qDebug() << title;
+
+    auto const uuid = QUuid::createUuid();
+    QString const filePath = WorkingDir.filePath(uuid.toString().remove('{').remove('}') + ".wav");
+
+    if(!QFile::rename(TemporaryFilePath, filePath)) {
+        qDebug() << "failed to rename temporary audio file";
+        return;
+    }
+
+    m_databaseDAO->insert(DTO::DatabaseEntry::AudioNote, title, filePath);
+}
+
+void AudioNoteModel::remove(qint64 id)
+{
+    auto const databaseEntry = m_databaseDAO->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such audio note found with id" << id;
+        return;
+    }
+
+    m_databaseDAO->remove(id);
+
+    QFile file(databaseEntry->media);
+    file.remove();
 }
 
 }

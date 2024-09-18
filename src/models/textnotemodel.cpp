@@ -23,13 +23,17 @@ TextNoteModel::TextNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
 
 void TextNoteModel::insert(QString title, QString body)
 {
+    qDebug() << title;
+
     auto const uuid = QUuid::createUuid();
     QString const filePath = WorkingDir.filePath(uuid.toString().remove('{').remove('}') + ".txt");
+
     QFile file(filePath);
     if(!file.open(QFile::WriteOnly | QFile::Truncate)) {
         qDebug() << "failed to open file" << filePath;
         return;
     }
+
     QTextStream textStream(&file);
     textStream << body;
     file.close();

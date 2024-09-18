@@ -1,8 +1,13 @@
 #ifndef AUDIONOTEMODEL_H
 #define AUDIONOTEMODEL_H
 
+#include <optional>
+
 #include <QDir>
 #include <QObject>
+#include <QString>
+
+#include "dto/audionote.h"
 
 namespace DAO {
 class DatabaseDAO;
@@ -16,6 +21,12 @@ class AudioNoteModel: public QObject
 
 public:
     explicit AudioNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent = nullptr);
+
+    std::optional<DTO::AudioNote> find(qint64 id) const;
+
+    void insert(QString title);
+
+    void remove(qint64 id);
 
     static QDir const WorkingDir;
     static QString const TemporaryFilePath;

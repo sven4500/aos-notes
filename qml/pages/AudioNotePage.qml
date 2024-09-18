@@ -34,6 +34,25 @@ Page {
 
     property int noteId: 0
 
+    Component.onCompleted: {
+        console.log("AudioNotePage", noteId, _audioNoteViewModel.title)
+
+        // INFO: http://imaginativethinking.ca/bi-directional-data-binding-qt-quick/
+        header.noteTitle = _audioNoteViewModel.title
+    }
+
+    Binding {
+        target: _audioNoteViewModel
+        property: "id"
+        value: noteId
+    }
+
+    Binding {
+        target: _audioNoteViewModel
+        property: "title"
+        value: header.noteTitle
+    }
+
     AudioRecorder {
         id: recorder
         outputLocation: _audioNoteViewModel.outputLocation
@@ -46,6 +65,9 @@ Page {
 
     NoteHeader {
         id: header
+        canRemove: noteId !== 0
+        onBackClicked: _audioNoteViewModel.insertNote()
+        onRemoveClicked: _audioNoteViewModel.removeNote()
     }
 
     Rectangle {

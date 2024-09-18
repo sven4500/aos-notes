@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include <QDebug>
 
 #include "noteviewmodel.h"
@@ -35,6 +36,11 @@ void NoteViewModel::setTitle(const QString &newTitle)
         return;
     m_title = newTitle;
     emit titleChanged();
+}
+
+QString NoteViewModel::defaultTitle()
+{
+    return tr("New note") + " " + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm");
 }
 
 }
