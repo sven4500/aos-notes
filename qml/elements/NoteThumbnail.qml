@@ -20,6 +20,7 @@ Rectangle {
             PropertyChanges { target: textNoteThumbnail; visible: true }
             PropertyChanges { target: mouseArea; onClicked: pageStack.push("../pages/TextNotePage.qml",
                                                                            {noteId: model.id}) }
+            PropertyChanges { target: image; source: Qt.resolvedUrl("../icons/pen.svg") }
         },
         State {
             name: "SketchNoteState"
@@ -31,6 +32,7 @@ Rectangle {
             PropertyChanges { target: audioNoteThumbnail; visible: true }
             PropertyChanges { target: mouseArea; onClicked: pageStack.push("../pages/AudioNotePage.qml",
                                                                            {noteId: model.id}) }
+            PropertyChanges { target: image; source: Qt.resolvedUrl("../icons/tape.svg") }
         }
     ]
 
@@ -73,11 +75,22 @@ Rectangle {
         //border { color: "red" }
     }
 
+    Image {
+        id: image
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.margins: Theme.paddingMedium
+        sourceSize.width: Theme.iconSizeSmall
+        sourceSize.height: Theme.iconSizeSmall
+    }
+
     Label {
         id: dateTime
+        anchors.left: image.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: Theme.paddingMedium
+        horizontalAlignment: Text.AlignRight
         color: "gray"
         text: Qt.formatDateTime(model.modifiedAt, "yyyy.MM.dd hh:mm")
         font.pixelSize: Theme.fontSizeSmall
