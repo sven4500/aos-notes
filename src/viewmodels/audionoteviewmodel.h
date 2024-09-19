@@ -24,6 +24,8 @@ public:
     Q_INVOKABLE virtual void insertNote();
     Q_INVOKABLE virtual void removeNote();
 
+    Q_INVOKABLE static QString parseTime(int milliseconds);
+
     const QString &outputLocation() const;
 
     const QString &mediaPath() const;

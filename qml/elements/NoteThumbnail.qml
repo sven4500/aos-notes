@@ -49,6 +49,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.margins: Theme.paddingMedium
+        truncationMode: TruncationMode.Fade
         color: "black"
         text: model.title
     }
@@ -91,6 +92,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: Theme.paddingMedium
         horizontalAlignment: Text.AlignRight
+        truncationMode: TruncationMode.Fade
         color: "gray"
         text: Qt.formatDateTime(model.modifiedAt, "yyyy.MM.dd hh:mm")
         font.pixelSize: Theme.fontSizeSmall

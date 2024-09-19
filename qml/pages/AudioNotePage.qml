@@ -28,9 +28,7 @@ Page {
                          recorder.state !== AudioRecorder.RecordingState }
             PropertyChanges { target: header; canRemove: false }
             PropertyChanges { target: recordButton; visible: true }
-            PropertyChanges { target: recordTimeLabel;
-                //visible: recorder.state === AudioRecorder.RecordingState
-                visible: true }
+            PropertyChanges { target: recordTimeLabel; visible: recorder.state === AudioRecorder.RecordingState }
             PropertyChanges { target: player; source: _audioNoteViewModel.outputLocation }
         }
     ]
@@ -65,20 +63,10 @@ Page {
     AudioRecorder {
         id: recorder
         outputLocation: _audioNoteViewModel.outputLocation
-
-        readonly property alias milliseconds: recorder.duration
-        readonly property int seconds: milliseconds / 1000
-        readonly property int minutes: seconds / 60
-        readonly property int hours: minutes / 60
     }
 
     Audio {
         id: player
-
-        readonly property alias milliseconds: player.position
-        readonly property int seconds: milliseconds / 1000
-        readonly property int minutes: seconds / 60
-        readonly property int hours: minutes / 60
     }
 
     Rectangle {
@@ -103,12 +91,19 @@ Page {
         //border.color: "red"
 
         Label {
+            id: positionLabel
+            anchors.top: parent.top
+            anchors.left: slider.left
+            text: _audioNoteViewModel.parseTime(player.position)
+            font.pixelSize: Theme.fontSizeSmall
+            color: "gray"
+        }
+
+        Label {
             id: durationLabel
             anchors.top: parent.top
             anchors.right: slider.right
-            text: ("0" + player.hours).slice(-2) + ":" +
-                  ("0" + player.minutes).slice(-2) + ":" +
-                  ("0" + player.seconds).slice(-2)
+            text: _audioNoteViewModel.parseTime(player.duration)
             font.pixelSize: Theme.fontSizeSmall
             color: "gray"
         }
@@ -157,9 +152,7 @@ Page {
         anchors.top: recordButton.bottom
         anchors.topMargin: Theme.paddingMedium
         anchors.horizontalCenter: recordButton.horizontalCenter
-        text: ("0" + recorder.hours).slice(-2) + ":" +
-              ("0" + recorder.minutes).slice(-2) + ":" +
-              ("0" + recorder.seconds).slice(-2)
+        text: _audioNoteViewModel.parseTime(recorder.duration)
         color: "gray"
     }
 }
