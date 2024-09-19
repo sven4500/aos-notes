@@ -1,3 +1,4 @@
+import QtMultimedia 5.6
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
@@ -17,6 +18,7 @@ Page {
             PropertyChanges { target: header; canRemove: true }
             PropertyChanges { target: recordButton; visible: false }
             PropertyChanges { target: recordTimeLabel; visible: false }
+            PropertyChanges { target: player; source: _audioNoteViewModel.mediaPath }
         },
         State {
             name: "NewNoteState"
@@ -29,6 +31,7 @@ Page {
             PropertyChanges { target: recordTimeLabel;
                 //visible: recorder.state === AudioRecorder.RecordingState
                 visible: true }
+            PropertyChanges { target: player; source: _audioNoteViewModel.outputLocation }
         }
     ]
 
@@ -53,9 +56,29 @@ Page {
         value: header.noteTitle
     }
 
+    Binding {
+        target: slider
+        property: "value"
+        value: player.position
+    }
+
     AudioRecorder {
         id: recorder
         outputLocation: _audioNoteViewModel.outputLocation
+
+        readonly property alias milliseconds: recorder.duration
+        readonly property int seconds: milliseconds / 1000
+        readonly property int minutes: seconds / 60
+        readonly property int hours: minutes / 60
+    }
+
+    Audio {
+        id: player
+
+        readonly property alias milliseconds: player.position
+        readonly property int seconds: milliseconds / 1000
+        readonly property int minutes: seconds / 60
+        readonly property int hours: minutes / 60
     }
 
     Rectangle {
@@ -79,25 +102,28 @@ Page {
         anchors.margins: Theme.paddingMedium
         //border.color: "red"
 
-        readonly property alias milliseconds: recorder.duration
-        property int seconds: milliseconds / 1000
-        property int minutes: seconds / 60
-        property int hours: minutes / 60
-
         Label {
             id: durationLabel
             anchors.top: parent.top
             anchors.right: slider.right
-            text: "00:00:00"
+            text: ("0" + player.hours).slice(-2) + ":" +
+                  ("0" + player.minutes).slice(-2) + ":" +
+                  ("0" + player.seconds).slice(-2)
             font.pixelSize: Theme.fontSizeSmall
-            color: "grey"
+            color: "gray"
         }
 
         ImageButton {
             id: playButton
             anchors.left: parent.left
             anchors.verticalCenter: slider.verticalCenter
-            image: Qt.resolvedUrl("../icons/play.svg")
+            image: player.playbackState === Audio.PlayingState ?
+                       Qt.resolvedUrl("../icons/pause.svg") :
+                       Qt.resolvedUrl("../icons/play.svg")
+            onClicked: player.playbackState === Audio.PlayingState ?
+                           player.pause() :
+                           player.play()
+
         }
 
         Slider {
@@ -107,6 +133,8 @@ Page {
             anchors.right: parent.right
             anchors.top: durationLabel.bottom
             anchors.topMargin: Theme.paddingMedium
+            maxValue: player.duration
+            onValueChanged: player.seek(value)
         }
     }
 
@@ -129,7 +157,9 @@ Page {
         anchors.top: recordButton.bottom
         anchors.topMargin: Theme.paddingMedium
         anchors.horizontalCenter: recordButton.horizontalCenter
-        text: "00:00:00"
+        text: ("0" + recorder.hours).slice(-2) + ":" +
+              ("0" + recorder.minutes).slice(-2) + ":" +
+              ("0" + recorder.seconds).slice(-2)
         color: "gray"
     }
 }

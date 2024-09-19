@@ -57,9 +57,23 @@ void AudioNoteViewModel::onIdChanged()
             return;
         }
         setTitle(audioNote->title);
+        setMediaPath(audioNote->filePath);
     } else {
         setTitle({});
     }
+}
+
+const QString &AudioNoteViewModel::mediaPath() const
+{
+    return m_mediaPath;
+}
+
+void AudioNoteViewModel::setMediaPath(const QString &newMediaPath)
+{
+    if (m_mediaPath == newMediaPath)
+        return;
+    m_mediaPath = newMediaPath;
+    emit mediaPathChanged();
 }
 
 }

@@ -17,6 +17,7 @@ class AudioNoteViewModel: public NoteViewModel
 
 public:
     Q_PROPERTY(QString outputLocation READ outputLocation CONSTANT)
+    Q_PROPERTY(QString mediaPath READ mediaPath WRITE setMediaPath NOTIFY mediaPathChanged)
 
     explicit AudioNoteViewModel(Models::AudioNoteModel* model, QObject *parent = nullptr);
 
@@ -25,12 +26,19 @@ public:
 
     const QString &outputLocation() const;
 
+    const QString &mediaPath() const;
+    void setMediaPath(const QString &newMediaPath);
+
+signals:
+    void mediaPathChanged();
+
 private slots:
     void onIdChanged();
 
 private:
     Models::AudioNoteModel* m_model = nullptr;
 
+    QString m_mediaPath;
 };
 
 }
