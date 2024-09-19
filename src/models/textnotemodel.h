@@ -32,7 +32,7 @@ public:
     static QDir const WorkingDir;
 
 private:
-    DAO::DatabaseDAO* m_databaseDao = nullptr;
+    DAO::DatabaseDAO* m_databaseDAO = nullptr;
 
 };
 

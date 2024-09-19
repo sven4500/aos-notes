@@ -28,6 +28,8 @@ public:
 
     void remove(qint64 id);
 
+    void update(qint64 id, QString title);
+
     static QDir const WorkingDir;
     static QString const TemporaryFilePath;
 

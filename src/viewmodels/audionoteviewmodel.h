@@ -25,9 +25,10 @@ public:
 
     const QString &outputLocation() const;
 
-private:
+private slots:
     void onIdChanged();
 
+private:
     Models::AudioNoteModel* m_model = nullptr;
 
 };

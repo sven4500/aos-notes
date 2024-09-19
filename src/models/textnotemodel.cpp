@@ -15,7 +15,7 @@ QDir const TextNoteModel::WorkingDir =
 
 TextNoteModel::TextNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
     : QObject(parent)
-    , m_databaseDao(databaseDAO)
+    , m_databaseDAO(databaseDAO)
 {
     qsrand(time(nullptr));
     QDir().mkdir(WorkingDir.path());
@@ -38,14 +38,14 @@ void TextNoteModel::insert(QString title, QString body)
     textStream << body;
     file.close();
 
-    m_databaseDao->insert(DTO::DatabaseEntry::TextNote, title, filePath);
+    m_databaseDAO->insert(DTO::DatabaseEntry::TextNote, title, filePath);
 }
 
 void TextNoteModel::update(qint64 id, QString title, QString body)
 {
     qDebug() << id << title << body;
 
-    auto const databaseEntry = m_databaseDao->find(id);
+    auto const databaseEntry = m_databaseDAO->find(id);
     if (!databaseEntry) {
         qDebug() << "no such text note with id" << id;
         return;
@@ -59,12 +59,12 @@ void TextNoteModel::update(qint64 id, QString title, QString body)
         qDebug() << "failed to open text file" << databaseEntry->media;
     }
 
-    m_databaseDao->update(id, title);
+    m_databaseDAO->update(id, title);
 }
 
 std::optional<DTO::TextNote> TextNoteModel::find(qint64 id) const
 {
-    auto const databaseEntry = m_databaseDao->find(id);
+    auto const databaseEntry = m_databaseDAO->find(id);
     if (!databaseEntry) {
         qDebug() << "no such text note with id" << id;
         return {};
@@ -83,13 +83,13 @@ std::optional<DTO::TextNote> TextNoteModel::find(qint64 id) const
 
 void TextNoteModel::remove(qint64 id)
 {
-    auto const databaseEntry = m_databaseDao->find(id);
+    auto const databaseEntry = m_databaseDAO->find(id);
     if (!databaseEntry) {
         qDebug() << "no such text note found with id" << id;
         return;
     }
 
-    m_databaseDao->remove(id);
+    m_databaseDAO->remove(id);
 
     QFile file(databaseEntry->media);
     file.remove();

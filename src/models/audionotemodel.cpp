@@ -60,8 +60,22 @@ void AudioNoteModel::remove(qint64 id)
 
     m_databaseDAO->remove(id);
 
+    qDebug() << "remove audio file" << databaseEntry->media;
     QFile file(databaseEntry->media);
     file.remove();
+}
+
+void AudioNoteModel::update(qint64 id, QString title)
+{
+    qDebug() << id << title;
+
+    auto const databaseEntry = m_databaseDAO->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such text note with id" << id;
+        return;
+    }
+
+    m_databaseDAO->update(id, title);
 }
 
 }
