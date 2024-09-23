@@ -16,6 +16,12 @@ Page {
         console.log("SketchNotePage", noteId)
     }
 
+    Binding {
+        target: _sketchNoteViewModel
+        property: "grab"
+        value: sketchItem.grab
+    }
+
     Rectangle {
         anchors.fill: parent
         color: "white"
