@@ -8,6 +8,7 @@ Page {
     id: page
     allowedOrientations: Orientation.All
     showNavigationIndicator: false
+    backNavigation: false
 
     property int noteId: 0
 

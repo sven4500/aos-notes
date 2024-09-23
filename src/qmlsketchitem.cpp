@@ -1,4 +1,5 @@
 #include <QPainter>
+#include <QPen>
 
 #include "qmlsketchitem.h"
 
@@ -13,27 +14,47 @@ QmlSketchItem::QmlSketchItem(QQuickItem *parent)
 
 void QmlSketchItem::paint(QPainter *painter)
 {
-    painter->setPen(Qt::red);
-    painter->drawRect(0, 0, width() - 1, height() - 1);
+    painter->setPen(QPen(Qt::black, 3));
+    //painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
+    //painter->setRenderHint(QPainter::HighQualityAntialiasing, true);
+
+    for (auto& points : m_points) {
+        painter->drawLines(points);
+    }
 }
 
 void QmlSketchItem::mousePressEvent(QMouseEvent *event)
 {
-    qDebug();
+    qDebug() << "mousePressEvent";
 
-    _delta.start();
+    m_points.append(QVector<QPointF>{});
+
+    m_delta.start();
     event->accept();
 }
 
 void QmlSketchItem::mouseMoveEvent(QMouseEvent *event)
 {
-    if (!_delta.hasExpired(1000))
+    if (!m_delta.hasExpired(10))
         return;
 
-    auto const pos = event->localPos();
-    qDebug() << pos.x() << pos.y();
+    auto const point = event->localPos();
+    if (!m_points.back().empty())
+        m_points.back().append(point);
+    m_points.back().append(point);
 
-    _delta.start();
+    update();
+
+    m_delta.start();
+    event->accept();
+}
+
+void QmlSketchItem::mouseReleaseEvent(QMouseEvent *event)
+{
+    qDebug() << "mouseReleaseEvent";
+
+    update();
+
     event->accept();
 }
 
