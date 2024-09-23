@@ -20,8 +20,8 @@ public:
 
     explicit NoteViewModel(QObject *parent = nullptr);
 
-    virtual void insertNote() = 0;
-    virtual void removeNote() = 0;
+    Q_INVOKABLE virtual void insertNote() = 0;
+    Q_INVOKABLE virtual void removeNote() = 0;
 
     qint64 id() const;
     void setId(qint64 newId);

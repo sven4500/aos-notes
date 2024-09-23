@@ -21,8 +21,8 @@ public:
 
     explicit AudioNoteViewModel(Models::AudioNoteModel* model, QObject *parent = nullptr);
 
-    Q_INVOKABLE virtual void insertNote();
-    Q_INVOKABLE virtual void removeNote();
+    virtual void insertNote();
+    virtual void removeNote();
 
     Q_INVOKABLE static QString parseTime(int milliseconds);
 

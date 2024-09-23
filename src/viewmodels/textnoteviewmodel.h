@@ -23,8 +23,8 @@ public:
 
     explicit TextNoteViewModel(Models::TextNoteModel* model, QObject *parent = nullptr);
 
-    Q_INVOKABLE virtual void insertNote();
-    Q_INVOKABLE virtual void removeNote();
+    virtual void insertNote();
+    virtual void removeNote();
 
     const QString &body() const;
     void setBody(const QString &newBody);

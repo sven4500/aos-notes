@@ -24,8 +24,8 @@ Page {
     NoteHeader {
         id: header
         canRemove: noteId !== 0
-        //onBackClicked: _sketchNoteViewModel.insertNote()
-        //onRemoveClicked: _sketchNoteViewModel.removeNote()
+        onBackClicked: _sketchNoteViewModel.insertNote()
+        onRemoveClicked: _sketchNoteViewModel.removeNote()
     }
 
     SketchItem {

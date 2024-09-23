@@ -26,6 +26,8 @@ set(SOURCES
     src/main.cpp
     src/models/audionotemodel.cpp
     src/models/audionotemodel.h
+    src/models/sketchnotemodel.cpp
+    src/models/sketchnotemodel.h
     src/models/textnotemodel.cpp
     src/models/textnotemodel.h
     src/qmlsketchitem.cpp
@@ -36,6 +38,8 @@ set(SOURCES
     src/viewmodels/listviewmodel.h
     src/viewmodels/noteviewmodel.cpp
     src/viewmodels/noteviewmodel.h
+    src/viewmodels/sketchnoteviewmodel.cpp
+    src/viewmodels/sketchnoteviewmodel.h
     src/viewmodels/textnoteviewmodel.cpp
     src/viewmodels/textnoteviewmodel.h
 )
