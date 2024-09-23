@@ -26,6 +26,7 @@ Rectangle {
         anchors.leftMargin: Theme.paddingMedium
         anchors.verticalCenter: parent.verticalCenter
         image: Qt.resolvedUrl("../icons/marker.svg")
+        onClicked: pageStack.push(Qt.resolvedUrl("../pages/SketchNotePage.qml"))
     }
 
     ImageButton {
