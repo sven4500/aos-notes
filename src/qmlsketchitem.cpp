@@ -14,6 +14,9 @@ QmlSketchItem::QmlSketchItem(QQuickItem *parent)
 
 void QmlSketchItem::paint(QPainter *painter)
 {
+    if (!m_image.isNull())
+        painter->drawImage(0, 0, m_image);
+
     painter->setPen(QPen(Qt::black, 3));
     //painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
     //painter->setRenderHint(QPainter::HighQualityAntialiasing, true);
@@ -62,12 +65,18 @@ void QmlSketchItem::mouseReleaseEvent(QMouseEvent *event)
 
 bool QmlSketchItem::empty() const
 {
-    return m_points.empty();
+    return m_points.empty() && m_image.isNull();
 }
 
 QSharedPointer<QQuickItemGrabResult> QmlSketchItem::grab()
 {
     return grabToImage();
+}
+
+void QmlSketchItem::setImage(const QImage &newImage)
+{
+    qDebug() << newImage;
+    m_image = newImage;
 }
 
 }

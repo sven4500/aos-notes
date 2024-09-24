@@ -16,7 +16,7 @@ Page {
         console.log("SketchNotePage", noteId)
 
         header.noteTitle = _sketchNoteViewModel.title
-        //sketchItem.image = _sketchNoteViewModel.image
+        sketchItem.image = _sketchNoteViewModel.image
     }
 
     Binding {

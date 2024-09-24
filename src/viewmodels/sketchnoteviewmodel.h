@@ -20,6 +20,7 @@ class SketchNoteViewModel: public NoteViewModel
 
 public:
     Q_PROPERTY(QSharedPointer<QQuickItemGrabResult> grab READ grab WRITE setGrab)
+    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
     Q_PROPERTY(bool empty READ empty WRITE setEmpty)
 
     explicit SketchNoteViewModel(Models::SketchNoteModel *model, QObject *parent = nullptr);
@@ -33,8 +34,15 @@ public:
     bool empty() const;
     void setEmpty(bool newEmpty);
 
+    const QImage &image() const;
+    void setImage(const QImage &newImage);
+
+signals:
+    void imageChanged();
+
 private slots:
     void onGrabReady();
+    void onIdChanged();
 
 private:
     QImage m_image;

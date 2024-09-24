@@ -16,13 +16,13 @@ class QmlSketchItem: public QQuickPaintedItem
     Q_OBJECT
 
 signals:
+    void grabChanged();
     void emptyChanged();
 
-    void grabChanged();
-
 public:
-    Q_PROPERTY(bool empty READ empty NOTIFY emptyChanged)
     Q_PROPERTY(QSharedPointer<QQuickItemGrabResult> grab READ grab NOTIFY grabChanged)
+    Q_PROPERTY(QImage image WRITE setImage)
+    Q_PROPERTY(bool empty READ empty NOTIFY emptyChanged)
 
     QmlSketchItem(QQuickItem *parent = nullptr);
 
@@ -36,8 +36,11 @@ public:
 
     QSharedPointer<QQuickItemGrabResult> grab();
 
+    void setImage(const QImage &newImage);
+
 protected:
     QList<QVector<QPointF>> m_points;
+    QImage m_image;
     QElapsedTimer m_delta;
 
 };

@@ -19,6 +19,19 @@ SketchNoteModel::SketchNoteModel(DAO::DatabaseDAO* databaseDAO, QObject *parent)
     QDir().mkdir(WorkingDir.path());
 }
 
+std::optional<DTO::SketchNote> SketchNoteModel::find(qint64 id) const
+{
+    qDebug() << id;
+
+    auto const databaseEntry = m_databaseDAO->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such sketch note found with id" << id;
+        return {};
+    }
+
+    return DTO::SketchNote {id, databaseEntry->title, QImage(databaseEntry->media)};
+}
+
 void SketchNoteModel::insert(QString title, QImage image)
 {
     qDebug() << title;
