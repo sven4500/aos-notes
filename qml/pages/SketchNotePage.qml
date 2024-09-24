@@ -14,12 +14,15 @@ Page {
 
     Component.onCompleted: {
         console.log("SketchNotePage", noteId)
+
+        header.noteTitle = _sketchNoteViewModel.title
+        //sketchItem.image = _sketchNoteViewModel.image
     }
 
     Binding {
         target: _sketchNoteViewModel
-        property: "grab"
-        value: sketchItem.grab
+        property: "id"
+        value: noteId
     }
 
     Rectangle {
@@ -32,6 +35,12 @@ Page {
         canRemove: noteId !== 0
         onBackClicked: _sketchNoteViewModel.insertNote()
         onRemoveClicked: _sketchNoteViewModel.removeNote()
+
+        Binding {
+            target: _sketchNoteViewModel
+            property: "title"
+            value: header.noteTitle
+        }
     }
 
     SketchItem {
@@ -42,5 +51,17 @@ Page {
         anchors.topMargin: Theme.paddingMedium
         anchors.bottom: parent.bottom
         anchors.bottomMargin: Theme.paddingMedium
+
+        Binding {
+            target: _sketchNoteViewModel
+            property: "grab"
+            value: sketchItem.grab
+        }
+
+        Binding {
+            target: _sketchNoteViewModel
+            property: "empty"
+            value: sketchItem.empty
+        }
     }
 }

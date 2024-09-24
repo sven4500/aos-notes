@@ -56,12 +56,13 @@ void QmlSketchItem::mouseReleaseEvent(QMouseEvent *event)
     update();
 
     emit grabChanged();
+    emit emptyChanged();
     event->accept();
 }
 
 bool QmlSketchItem::empty() const
 {
-    return !m_points.empty();
+    return m_points.empty();
 }
 
 QSharedPointer<QQuickItemGrabResult> QmlSketchItem::grab()

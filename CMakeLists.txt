@@ -22,6 +22,7 @@ set(SOURCES
     src/dao/databasedao.h
     src/dto/audionote.h
     src/dto/databaseentry.h
+    src/dto/sketchnote.h
     src/dto/textnote.h
     src/main.cpp
     src/models/audionotemodel.cpp

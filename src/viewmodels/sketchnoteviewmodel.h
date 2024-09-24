@@ -20,6 +20,7 @@ class SketchNoteViewModel: public NoteViewModel
 
 public:
     Q_PROPERTY(QSharedPointer<QQuickItemGrabResult> grab READ grab WRITE setGrab)
+    Q_PROPERTY(bool empty READ empty WRITE setEmpty)
 
     explicit SketchNoteViewModel(Models::SketchNoteModel *model, QObject *parent = nullptr);
 
@@ -29,6 +30,9 @@ public:
     QSharedPointer<QQuickItemGrabResult> grab() const;
     void setGrab(QSharedPointer<QQuickItemGrabResult> newImage);
 
+    bool empty() const;
+    void setEmpty(bool newEmpty);
+
 private slots:
     void onGrabReady();
 
@@ -36,6 +40,7 @@ private:
     QImage m_image;
     QSharedPointer<QQuickItemGrabResult> m_grab;
     Models::SketchNoteModel* m_model = nullptr;
+    bool m_empty = true;
 
 };
 
