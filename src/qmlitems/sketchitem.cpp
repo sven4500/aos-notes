@@ -1,18 +1,18 @@
 #include <QPainter>
 #include <QPen>
 
-#include "qmlsketchitem.h"
+#include "qmlitems/sketchitem.h"
 
 namespace QmlItems {
 
-QmlSketchItem::QmlSketchItem(QQuickItem *parent)
+SketchQmlItem::SketchQmlItem(QQuickItem *parent)
     : QQuickPaintedItem(parent)
 {
     setFlag(QQuickItem::ItemHasContents);
     setAcceptedMouseButtons(Qt::LeftButton);
 }
 
-void QmlSketchItem::paint(QPainter *painter)
+void SketchQmlItem::paint(QPainter *painter)
 {
     if (!m_image.isNull())
         painter->drawImage(0, 0, m_image);
@@ -26,7 +26,7 @@ void QmlSketchItem::paint(QPainter *painter)
     }
 }
 
-void QmlSketchItem::mousePressEvent(QMouseEvent *event)
+void SketchQmlItem::mousePressEvent(QMouseEvent *event)
 {
     qDebug() << "mousePressEvent";
 
@@ -36,7 +36,7 @@ void QmlSketchItem::mousePressEvent(QMouseEvent *event)
     event->accept();
 }
 
-void QmlSketchItem::mouseMoveEvent(QMouseEvent *event)
+void SketchQmlItem::mouseMoveEvent(QMouseEvent *event)
 {
     if (!m_delta.hasExpired(10))
         return;
@@ -52,7 +52,7 @@ void QmlSketchItem::mouseMoveEvent(QMouseEvent *event)
     event->accept();
 }
 
-void QmlSketchItem::mouseReleaseEvent(QMouseEvent *event)
+void SketchQmlItem::mouseReleaseEvent(QMouseEvent *event)
 {
     qDebug() << "mouseReleaseEvent";
 
@@ -63,17 +63,17 @@ void QmlSketchItem::mouseReleaseEvent(QMouseEvent *event)
     event->accept();
 }
 
-bool QmlSketchItem::empty() const
+bool SketchQmlItem::empty() const
 {
     return m_points.empty() && m_image.isNull();
 }
 
-QSharedPointer<QQuickItemGrabResult> QmlSketchItem::grab()
+QSharedPointer<QQuickItemGrabResult> SketchQmlItem::grab()
 {
     return grabToImage();
 }
 
-void QmlSketchItem::setImage(const QImage &newImage)
+void SketchQmlItem::setImage(const QImage &newImage)
 {
     qDebug() << newImage;
     m_image = newImage;

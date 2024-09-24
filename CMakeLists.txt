@@ -31,8 +31,8 @@ set(SOURCES
     src/models/sketchnotemodel.h
     src/models/textnotemodel.cpp
     src/models/textnotemodel.h
-    src/qmlsketchitem.cpp
-    src/qmlsketchitem.h
+    src/qmlitems/sketchitem.cpp
+    src/qmlitems/sketchitem.h
     src/viewmodels/audionoteviewmodel.cpp
     src/viewmodels/audionoteviewmodel.h
     src/viewmodels/listviewmodel.cpp

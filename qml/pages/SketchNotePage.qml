@@ -43,7 +43,7 @@ Page {
         }
     }
 
-    SketchItem {
+    Sketch {
         id: sketchItem
         anchors.left: parent.left
         anchors.right: parent.right

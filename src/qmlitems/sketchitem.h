@@ -11,7 +11,7 @@
 
 namespace QmlItems {
 
-class QmlSketchItem: public QQuickPaintedItem
+class SketchQmlItem: public QQuickPaintedItem
 {
     Q_OBJECT
 
@@ -24,7 +24,7 @@ public:
     Q_PROPERTY(QImage image WRITE setImage)
     Q_PROPERTY(bool empty READ empty NOTIFY emptyChanged)
 
-    QmlSketchItem(QQuickItem *parent = nullptr);
+    SketchQmlItem(QQuickItem *parent = nullptr);
 
     virtual void paint(QPainter *painter);
 

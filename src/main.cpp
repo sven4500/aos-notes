@@ -9,7 +9,7 @@
 #include "models/audionotemodel.h"
 #include "models/sketchnotemodel.h"
 #include "models/textnotemodel.h"
-#include "qmlsketchitem.h"
+#include "qmlitems/sketchitem.h"
 #include "viewmodels/audionoteviewmodel.h"
 #include "viewmodels/listviewmodel.h"
 #include "viewmodels/sketchnoteviewmodel.h"
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     application->setApplicationName(QStringLiteral("notes"));
 
     qmlRegisterType<Managers::AudioRecorder>("Managers", 1, 0, "AudioRecorder");
-    qmlRegisterType<QmlItems::QmlSketchItem>("QmlItems", 1, 0, "SketchItem");
+    qmlRegisterType<QmlItems::SketchQmlItem>("QmlItems", 1, 0, "Sketch");
     qmlRegisterUncreatableType<DTO::DatabaseEntry>("DTO", 1, 0, "DatabaseEntry", "DTOs can not be created on QML side");
     qmlRegisterUncreatableType<Models::AudioNoteModel>("Models", 1, 0, "AudioNoteModel", "models can not be created on QML side");
 
