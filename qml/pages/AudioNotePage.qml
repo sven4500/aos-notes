@@ -48,18 +48,6 @@ Page {
         value: noteId
     }
 
-    Binding {
-        target: _audioNoteViewModel
-        property: "title"
-        value: header.noteTitle
-    }
-
-    Binding {
-        target: slider
-        property: "value"
-        value: player.position
-    }
-
     AudioRecorder {
         id: recorder
         outputLocation: _audioNoteViewModel.outputLocation
@@ -79,6 +67,12 @@ Page {
         canRemove: noteId !== 0
         onBackClicked: _audioNoteViewModel.insertNote()
         onRemoveClicked: _audioNoteViewModel.removeNote()
+
+        Binding {
+            target: _audioNoteViewModel
+            property: "title"
+            value: header.noteTitle
+        }
     }
 
     Rectangle {
@@ -130,6 +124,12 @@ Page {
             anchors.topMargin: Theme.paddingMedium
             maxValue: player.duration
             onValueChanged: player.seek(value)
+
+            Binding {
+                target: slider
+                property: "value"
+                value: player.position
+            }
         }
     }
 

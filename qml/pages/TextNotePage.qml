@@ -24,18 +24,6 @@ Page {
         value: noteId
     }
 
-    Binding {
-        target: _textNoteViewModel
-        property: "title"
-        value: header.noteTitle
-    }
-
-    Binding {
-        target: _textNoteViewModel
-        property: "body"
-        value: textArea.text
-    }
-
     Rectangle {
         anchors.fill: parent
         color: "white"
@@ -46,6 +34,12 @@ Page {
         canRemove: noteId !== 0
         onBackClicked: _textNoteViewModel.insertNote()
         onRemoveClicked: _textNoteViewModel.removeNote()
+
+        Binding {
+            target: _textNoteViewModel
+            property: "title"
+            value: header.noteTitle
+        }
     }
 
     TextArea {
@@ -58,5 +52,11 @@ Page {
         placeholderText: qsTr("Note text...")
         placeholderColor: "gray"
         color: "black"
+
+        Binding {
+            target: _textNoteViewModel
+            property: "body"
+            value: textArea.text
+        }
     }
 }

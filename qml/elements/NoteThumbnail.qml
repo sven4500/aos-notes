@@ -7,7 +7,7 @@ import "../elements"
 Rectangle {
     id: root
     width: Theme.itemSizeMedium
-    height: Theme.itemSizeHuge * 1.5
+    height: Theme.itemSizeHuge
     clip: true
     radius: 20
     border.color: "gray"
@@ -25,6 +25,10 @@ Rectangle {
         State {
             name: "SketchNoteState"
             when: model.type === DatabaseEntry.SketchNote
+            PropertyChanges { target: sketchNoteThumbnail; visible: true }
+            PropertyChanges { target: mouseArea; onClicked: pageStack.push("../pages/SketchNotePage.qml",
+                                                                           {noteId: model.id}) }
+            PropertyChanges { target: image; source: Qt.resolvedUrl("../icons/marker.svg") }
         },
         State {
             name: "AudioNoteState"
@@ -54,26 +58,33 @@ Rectangle {
         text: model.title
     }
 
-    TextNoteThumbnail {
-        id: textNoteThumbnail
+    Item {
         anchors.top: title.bottom
         anchors.bottom: dateTime.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: Theme.paddingMedium
-        visible: false
-        //border { color: "red" }
-    }
 
-    AudioNoteThumbnail {
-        id: audioNoteThumbnail
-        anchors.top: title.bottom
-        anchors.bottom: dateTime.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.margins: Theme.paddingMedium
-        visible: false
-        //border { color: "red" }
+        TextNoteThumbnail {
+            id: textNoteThumbnail
+            anchors.fill: parent
+            visible: false
+            //border { color: "red" }
+        }
+
+        AudioNoteThumbnail {
+            id: audioNoteThumbnail
+            anchors.fill: parent
+            visible: false
+            //border { color: "red" }
+        }
+
+        SketchNoteThumbnail {
+            id: sketchNoteThumbnail
+            anchors.fill: parent
+            visible: false
+            //border { color: "red" }
+        }
     }
 
     Image {
