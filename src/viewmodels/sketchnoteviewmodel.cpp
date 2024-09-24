@@ -33,7 +33,13 @@ void SketchNoteViewModel::insertNote()
 
 void SketchNoteViewModel::removeNote()
 {
-    qDebug();
+    qDebug() << m_id << m_title;
+
+    if (m_id != 0) {
+        m_model->remove(m_id);
+    } else {
+        qDebug() << "can not remove temporary note";
+    }
 }
 
 QSharedPointer<QQuickItemGrabResult> SketchNoteViewModel::grab() const

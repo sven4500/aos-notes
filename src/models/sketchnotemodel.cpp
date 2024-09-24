@@ -31,6 +31,21 @@ void SketchNoteModel::insert(QString title, QImage image)
     m_databaseDAO->insert(DTO::DatabaseEntry::SketchNote, title, filePath);
 }
 
+void SketchNoteModel::remove(qint64 id)
+{
+    auto const databaseEntry = m_databaseDAO->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such sketch note found with id" << id;
+        return;
+    }
+
+    m_databaseDAO->remove(id);
+
+    qDebug() << "remove sketch file" << databaseEntry->media;
+    QFile file(databaseEntry->media);
+    file.remove();
+}
+
 void SketchNoteModel::update(qint64 id, QString title, QImage image)
 {
     qDebug() << id << title << image;
