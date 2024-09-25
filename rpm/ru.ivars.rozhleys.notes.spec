@@ -1,6 +1,6 @@
 Name:       ru.ivars.rozhleys.notes
 Summary:    Notes for Aurora OS
-Version:    0.2.0
+Version:    0.3.0
 Release:    1
 License:    BSD-3-Clause
 URL:        https://gitlab.com/sven4500/aurora-notes
