@@ -12,9 +12,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(short_name notes)
 
-file(GLOB TsFiles "translations/*.ts")
-qt5_add_translation(QmFiles ${TsFiles})
-
 set(SOURCES
     src/audiorecorder.cpp
     src/audiorecorder.h
@@ -44,6 +41,11 @@ set(SOURCES
     src/viewmodels/textnoteviewmodel.cpp
     src/viewmodels/textnoteviewmodel.h
 )
+
+file(GLOB_RECURSE QmlFiles "qml/*.qml")
+file(GLOB TsFiles "translations/*.ts")
+qt5_create_translation(TRANSLATION_QM ${QmlFiles} ${TsFiles})
+qt5_add_translation(QmFiles ${TsFiles})
 
 set(CMAKE_SKIP_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
