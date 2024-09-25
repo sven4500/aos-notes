@@ -62,6 +62,16 @@ void SketchNoteModel::remove(qint64 id)
 void SketchNoteModel::update(qint64 id, QString title, QImage image)
 {
     qDebug() << id << title << image;
+
+    auto const databaseEntry = m_databaseDAO->find(id);
+    if (!databaseEntry) {
+        qDebug() << "no such sketch note with id" << id;
+        return;
+    }
+
+    image.save(databaseEntry->media);
+
+    m_databaseDAO->update(id, title);
 }
 
 }
