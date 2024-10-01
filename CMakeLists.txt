@@ -44,7 +44,8 @@ set(SOURCES
 
 file(GLOB_RECURSE QmlFiles "qml/*.qml")
 file(GLOB TsFiles "translations/*.ts")
-qt5_create_translation(TRANSLATION_QM ${QmlFiles} ${TsFiles})
+set(SourceFiles ${SOURCES} ${QmlFiles})
+qt5_create_translation(TRANSLATION_QM ${SourceFiles} ${TsFiles})
 qt5_add_translation(QmFiles ${TsFiles})
 
 set(CMAKE_SKIP_RPATH FALSE)

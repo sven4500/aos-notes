@@ -33,4 +33,12 @@
         <translation>Note text...</translation>
     </message>
 </context>
+<context>
+    <name>ViewModels::NoteViewModel</name>
+    <message>
+        <location filename="../src/viewmodels/noteviewmodel.cpp" line="43"/>
+        <source>New note</source>
+        <translation>New note</translation>
+    </message>
+</context>
 </TS>
