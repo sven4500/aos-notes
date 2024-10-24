@@ -4,8 +4,16 @@ project(ru.ivars.rozhleys.notes CXX)
 find_package (Qt5 COMPONENTS Core Network Qml Gui Quick LinguistTools Sql Multimedia REQUIRED)
 
 include(FindPkgConfig)
-pkg_search_module(AURORA auroraapp REQUIRED)
-pkg_search_module(AURORA auroraapp_i18n REQUIRED)
+if (${PLATFORM_ID} STREQUAL "auroraos")
+    pkg_search_module(AURORA auroraapp REQUIRED)
+    pkg_search_module(AURORA auroraapp_i18n REQUIRED)
+    set(PLATFORM_INCLUDE_DIRS ${AURORA_INCLUDE_DIRS})
+    set(PLATFORM_LDFLAGS ${AURORA_LDFLAGS})
+elseif (${PLATFORM_ID} STREQUAL "sailfishos")
+    pkg_search_module(SAILFISH sailfishapp REQUIRED)
+    set(PLATFORM_INCLUDE_DIRS ${SAILFISH_INCLUDE_DIRS})
+    set(PLATFORM_LDFLAGS ${SAILFISH_LDFLAGS})
+endif()
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -55,18 +63,20 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/lib")
 add_executable(${PROJECT_NAME} ${SOURCES} ${QmFiles})
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+    ${PLATFORM_ID}
 )
 target_include_directories(${PROJECT_NAME} PRIVATE
     $<BUILD_INTERFACE:
-    ${AURORA_INCLUDE_DIRS}
+    ${PLATFORM_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/src
 >)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt5::Quick
     Qt5::Sql
     Qt5::Multimedia
-    ${AURORA_LDFLAGS}
+    ${PLATFORM_LDFLAGS}
 )
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
 install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

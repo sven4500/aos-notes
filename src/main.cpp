@@ -1,7 +1,13 @@
 #include <QQmlEngine>
 #include <QtQuick>
 
+#if defined(auroraos)
 #include <auroraapp.h>
+namespace platformNamespace = Aurora::Application;
+#elif defined(sailfishos)
+#include <sailfishapp.h>
+namespace platformNamespace = SailfishApp;
+#endif
 
 #include "audiorecorder.h"
 #include "dao/databasedao.h"
@@ -17,7 +23,7 @@
 
 int main(int argc, char** argv)
 {
-    QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
+    QScopedPointer<QGuiApplication> application(platformNamespace::application(argc, argv));
     application->setOrganizationName(QStringLiteral("ru.ivars.rozhleys"));
     application->setApplicationName(QStringLiteral("notes"));
 
@@ -37,12 +43,12 @@ int main(int argc, char** argv)
     auto const sketchNoteViewModel = new ViewModels::SketchNoteViewModel(sketchNoteModel, &*application);
     auto const textNoteViewModel = new ViewModels::TextNoteViewModel(textNoteModel, &*application);
 
-    QScopedPointer<QQuickView> view(Aurora::Application::createView());
+    QScopedPointer<QQuickView> view(platformNamespace::createView());
     view->rootContext()->setContextProperty("_audioNoteViewModel", audioNoteViewModel);
     view->rootContext()->setContextProperty("_listViewModel", listViewModel);
     view->rootContext()->setContextProperty("_sketchNoteViewModel", sketchNoteViewModel);
     view->rootContext()->setContextProperty("_textNoteViewModel", textNoteViewModel);
-    view->setSource(Aurora::Application::pathTo(QStringLiteral("qml/notes.qml")));
+    view->setSource(platformNamespace::pathTo(QStringLiteral("qml/notes.qml")));
     view->show();
 
     return application->exec();
